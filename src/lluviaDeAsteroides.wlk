@@ -218,6 +218,7 @@ class ObjetoVivoEnMenu {
 const rocaIzquierda = new ObjetoVivoEnMenu(listaDeImg=rocasMenu, position=izquierda)
 const rocaDerecha = new ObjetoVivoEnMenu(listaDeImg=rocasMenu, position=derecha)
 
+// Visuales
 
 class Visual {
 	var property image

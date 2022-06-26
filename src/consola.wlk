@@ -1,5 +1,5 @@
 import wollok.game.* 
-import juego.*
+import lluviaDeAsteroides.*
 
 object consola {
 
