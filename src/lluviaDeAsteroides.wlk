@@ -24,7 +24,7 @@ object juegoAsteroide {
     }
 	
 	method terminar(){
-
+		
 	}
 	method image() = "iconoJuego.png"
 	
@@ -35,6 +35,10 @@ object juegoAsteroide {
 
 object partida {
 	const dificultades = [dificultad.facil(), dificultad.medio(), dificultad.dificil()]
+	
+	method terminar(){
+		
+	}
 	
 	method iniciar() {
 		game.title("Naves Espaciales")
@@ -77,6 +81,7 @@ object partida {
 		game.addVisual(fondoAsteroide)
 		game.addVisualCharacter(laser)
 		game.addVisualCharacter(nave)
+		keyboard.q().onPressDo{consola.hacerTerminar(self)}
 		keyboard.z().onPressDo { nave.activarModoCombate() }
 		keyboard.x().onPressDo { nave.disparar() }
 		
