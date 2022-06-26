@@ -39,7 +39,7 @@ object partida {
 	method iniciar() {
 		game.title("Naves Espaciales")
 		game.width(16)
-		game.height(20)
+		game.height(12)
 		game.cellSize(50)
 		game.addVisual(fondoMenu)
 		self.moverRocasMenu()
@@ -91,8 +91,8 @@ object partida {
 			game.addVisual(asteroide)
 			asteroide.iniciarMovimiento(asteroide.velocidades().anyOne())
 		})
-		game.whenCollideDo(nave,{elemento=>if(elemento!=laser)elemento.metodosChoques()})
-		game.whenCollideDo(laser,{elemento=>if(elemento!=nave)elemento.metodosChoques()})
+		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide)elemento.metodosChoques()})
+		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=fondoAsteroide)elemento.metodosChoques()})
 		
  }
 }
@@ -246,7 +246,7 @@ const mute = new Visual(image="mute.png", position=game.at(1,1))
 const fondoEspacio = new Visual(image="wp9247430.jpg", position=game.at(0,0))
 const fondoMenu = new Visual(image="fondoMenu.jpg", position=game.at(0,0))
 const fondoAsteroide = new Visual(image="fondoAsteroides.png", position=game.at(0,0))
-const astronautaMenu = new Visual(image="astronautaMenu.png", position=game.at(1,9))
+const astronautaMenu = new Visual(image="astronautaMenu.png", position=game.at(1,4))
 
 const puntuacionAstronauta = new Visual(image="astronautaPuntuacion.png" ,position=game.at(0, game.height() - 2 ))
 
