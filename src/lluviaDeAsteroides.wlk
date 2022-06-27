@@ -48,6 +48,7 @@ object partida {
 		game.addVisual(fondoMenu)
 		self.moverRocasMenu()
 		game.addVisual(astronautaMenu)
+		self.iniciarMenu()
 		self.musica()
 		keyboard.space().onPressDo { self.jugar() }
 	}
@@ -60,11 +61,11 @@ object partida {
 	}
 	
 	method musica() {
-		keyboard.m().onPressDo { 
+		keyboard.p().onPressDo { 
 			musicaInicio.play()
 			musicaInicio.volume(0.5) 
 		}
-		keyboard.n().onPressDo {
+		keyboard.s().onPressDo {
 			if (musicaInicio.paused()) { 
 				musicaInicio.resume()
 				game.removeVisual(mute)
@@ -103,7 +104,28 @@ object partida {
 		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=fondoAsteroide)elemento.metodosChoques()})
 		
  }
+ 
+ 	method iniciarMenu(){
+		game.addVisual(menuPlay)
+		game.addVisual(menuMusic)
+		game.addVisual(menuDificulties)
+		keyboard.d().onPressDo {self.menuDificultades()}
+	}
+	
+	method menuDificultades(){
+		game.removeVisual(menuPlay)
+		game.removeVisual(menuMusic)
+		game.removeVisual(menuDificulties)
+		
+		game.addVisual(easy)
+		game.addVisual(medium)
+		game.addVisual(hard)
+		
+		dificultad.seleccionarDificultad()
+	}
 }
+
+
 
 object dificultad {
 	method facil() = 8000
@@ -272,3 +294,13 @@ const puntuacionAstronauta = new Visual(image="astronautaPuntuacion.png" ,positi
 // MUSICA
 
 const musicaInicio = new Sound(file="__-___ ____ _ Super Nintendo  Sega Genesis 80s RetroWave Mix (mp3cut.net).mp3")
+
+// Menu Principal y selleccion de dificultad
+
+const menuPlay = new Visual(image="menuPlay.png", position=game.at(4,4))
+const menuMusic = new Visual(image="botonMusic.png", position=game.at(4,3))
+const menuDificulties = new Visual(image="menuDificulties.png", position=game.at(4,2))
+const easy = new Visual(image="easy.png", position=game.at(4,4))
+const medium = new Visual(image="normal.png", position=game.at(4,3))
+const hard = new Visual(image="hard.png", position=game.at(4,2))
+
