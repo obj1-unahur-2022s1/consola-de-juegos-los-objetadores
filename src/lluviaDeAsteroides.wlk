@@ -163,6 +163,7 @@ class Vida // FALTA TERMINAR
  		
  		} 
 	}
+	
 class Asteroide {
 	var property position 
 	var property image 
@@ -219,14 +220,14 @@ class ObjetoVivoEnMenu {
 		position = position.left(1)
 		if (position.x() == -15) { 
 			image = listaDeImg.anyOne()
-			position = game.at(20,(2..20).anyOne())
+			position = game.at(20,(2..10).anyOne())
 		}
 	}
 	method moverDerecha() {
 		position = position.right(1)
 		if (position.x() == 20) { 
 			image = listaDeImg.anyOne()
-			position = game.at(-15,(2..20).anyOne())
+			position = game.at(-15,(2..10).anyOne())
 		}
 	}
 }
