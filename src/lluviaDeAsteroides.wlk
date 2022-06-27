@@ -31,7 +31,7 @@ object juegoAsteroide {
 }
 
 
-// Inicio
+// INICIO
 
 object partida {
 	const dificultades = [dificultad.facil(), dificultad.medio(), dificultad.dificil()]
@@ -43,7 +43,7 @@ object partida {
 	method iniciar() {
 		game.title("Naves Espaciales")
 		game.width(16)
-		game.height(12)
+		game.height(17)
 		game.cellSize(50)
 		game.addVisual(fondoMenu)
 		self.moverRocasMenu()
@@ -79,6 +79,9 @@ object partida {
 		game.clear()
 		game.addVisual(fondoEspacio)
 		game.addVisual(fondoAsteroide)
+		game.addVisual(astronautaPuntuacion1)
+		game.addVisual(astronautaPuntuacion2)
+		game.addVisual(astronautaPuntuacion3)
 		game.addVisualCharacter(laser)
 		game.addVisualCharacter(nave)
 		keyboard.q().onPressDo{consola.hacerTerminar(self)}
@@ -108,7 +111,7 @@ object dificultad {
 	method dificil() = 3000
 }
 
-// Objetos
+// OBJETOS
 
 object laser {
 	var property position =nave.position()
@@ -148,8 +151,18 @@ object nave {
 			laser.disparar()
 		}
 	}
-}
+} 
 
+class Vida // FALTA TERMINAR
+	{
+ var property position 
+ var property image
+ 	
+ 	method chocar()
+ 		{
+ 		
+ 		} 
+	}
 class Asteroide {
 	var property position 
 	var property image 
@@ -178,11 +191,9 @@ class Asteroide {
 	method chocar(){
 		game.onTick(100,"choque asteroide",{self.auxiliarDespuesChoque()})
 	}
-	//
 	method iniciarMovimiento(unaVelocidad) {
 		game.onTick(unaVelocidad,"mover asteroide",{ self.mover() })
 	}
-	
 	method mover() {
 		position = position.down(1)
 		if (position.y() == -4) { game.removeVisual(self) }
@@ -223,7 +234,7 @@ class ObjetoVivoEnMenu {
 const rocaIzquierda = new ObjetoVivoEnMenu(listaDeImg=rocasMenu, position=izquierda)
 const rocaDerecha = new ObjetoVivoEnMenu(listaDeImg=rocasMenu, position=derecha)
 
-// Visuales
+// VISUALES
 
 class Visual {
 	var property image
@@ -248,13 +259,16 @@ const rocasMenu = ["piedrasMenu2.png", "piedrasMenu3.png", "piedrasMenu1.png", "
 	"piedrasMenu6.png","piedrasMenu7.png","piedrasMenu8.png"]
 
 const mute = new Visual(image="mute.png", position=game.at(1,1))
-const fondoEspacio = new Visual(image="wp9247430.jpg", position=game.at(0,0))
+const fondoEspacio = new Visual(image="fondoPartida.jpg", position=game.at(0,0))
 const fondoMenu = new Visual(image="fondoMenu.jpg", position=game.at(0,0))
 const fondoAsteroide = new Visual(image="fondoAsteroides.png", position=game.at(0,0))
 const astronautaMenu = new Visual(image="astronautaMenu.png", position=game.at(1,4))
+const astronautaPuntuacion1 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,4))
+const astronautaPuntuacion2 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,5))
+const astronautaPuntuacion3 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,6))
 
 const puntuacionAstronauta = new Visual(image="astronautaPuntuacion.png" ,position=game.at(0, game.height() - 2 ))
 
-// Musica
+// MUSICA
 
 const musicaInicio = new Sound(file="__-___ ____ _ Super Nintendo  Sega Genesis 80s RetroWave Mix (mp3cut.net).mp3")
