@@ -80,14 +80,14 @@ object partida {
 		game.clear()
 		game.addVisual(fondoEspacio)
 		game.addVisual(fondoAsteroide)
-		game.addVisual(astronautaPuntuacion1)
-		game.addVisual(astronautaPuntuacion2)
-		game.addVisual(astronautaPuntuacion3)
 		game.addVisualCharacter(laser)
 		game.addVisualCharacter(nave)
-		keyboard.q().onPressDo{consola.hacerTerminar(self)}
+		keyboard.q().onPressDo{self.volverALaConsola()}
 		keyboard.z().onPressDo { nave.activarModoCombate() }
 		keyboard.x().onPressDo { nave.disparar() }
+		keyboard.k().onPressDo {self.irMenu()}
+		keyboard.r().onPressDo {self.reiniciar()}
+		keyboard.v().onPressDo {nave.decirVidas()}
 		
 		game.addVisual(score)
 	
@@ -104,8 +104,9 @@ object partida {
 			game.addVisual(asteroide)
 			asteroide.iniciarMovimiento(asteroide.velocidades().anyOne())
 		})
-		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)elemento.metodosChoques()})
-		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)elemento.metodosChoques()})
+		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)elemento.metodosChoques()});
+		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)elemento.metodosChoques()});
+		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)nave.chocar(elemento)});
 		
  }
  
@@ -127,6 +128,23 @@ object partida {
 		
 	
 	}*/
+	method reiniciar(){
+		game.addVisual(nave)
+		game.addVisual(laser)
+		nave.vidas(6)
+		nave.asteroidesRotos(0)
+		self.jugar()
+		
+	}
+	method irMenu(){
+		self.reiniciar()
+		self.iniciar()
+	}
+	
+	method volverALaConsola() {
+		self.reiniciar()
+		consola.hacerTerminar(self)
+	}
 }
 
 
@@ -169,12 +187,23 @@ object nave {
 	var property image = "naveBase.png"
 	var property modoCombate = false
 	var property asteroidesRotos = 0
+	var property vidas = 6
 	
 	//acciones de la nave vida 
 	method chocar(elemento){
-		
+		if(self.vidas() == 0){self.explotar()}else{vidas = 0.max(vidas-1);}
 	}
 	
+	method explotar(){
+		game.removeVisual(self)
+		game.removeVisual(laser)
+	}
+	
+	method decirVidas(){
+		game.say(self,"tengo "+self.vidas()+" vidas")	
+	}
+	
+	//
 	method activarModoCombate() {
 		if (not modoCombate) {
 			modoCombate = true
