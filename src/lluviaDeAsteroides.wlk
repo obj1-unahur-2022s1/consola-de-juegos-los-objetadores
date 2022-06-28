@@ -50,7 +50,7 @@ object partida {
 		game.addVisual(astronautaMenu)
 		self.iniciarMenu()
 		self.musica()
-		keyboard.space().onPressDo { self.jugar() }
+		keyboard.space().onPressDo {self.jugar()}
 	}
 
 	method moverRocasMenu() {
@@ -108,11 +108,11 @@ object partida {
  	method iniciarMenu(){
 		game.addVisual(menuPlay)
 		game.addVisual(menuMusic)
-		game.addVisual(menuDificulties)
-		keyboard.d().onPressDo {self.menuDificultades()}
+		//game.addVisual(menuDificulties)
+		//keyboard.d().onPressDo {self.menuDificultades()}
 	}
 	
-	method menuDificultades(){
+	/*method menuDificultades(){
 		game.removeVisual(menuPlay)
 		game.removeVisual(menuMusic)
 		game.removeVisual(menuDificulties)
@@ -121,8 +121,8 @@ object partida {
 		game.addVisual(medium)
 		game.addVisual(hard)
 		
-		dificultad.seleccionarDificultad()
-	}
+	
+	}*/
 }
 
 
@@ -131,6 +131,14 @@ object dificultad {
 	method facil() = 8000
 	method medio() = 5000
 	method dificil() = 3000
+	// FALTA TERMINAR !!!!
+/* 	method seleccionarDificultad() {
+		keyboard.e().onPressDo(partida.jugar(facil))
+		
+		keyboard.m().onPressDo(partida.jugar(medio))
+		
+		keyboard.h().onPressDo(partida.jugar(dificil))
+	}*/
 }
 
 // OBJETOS
@@ -298,8 +306,8 @@ const musicaInicio = new Sound(file="__-___ ____ _ Super Nintendo  Sega Genesis 
 
 // Menu Principal y selleccion de dificultad
 
-const menuPlay = new Visual(image="menuPlay.png", position=game.at(4,4))
-const menuMusic = new Visual(image="botonMusic.png", position=game.at(4,3))
+const menuPlay = new Visual(image="menuPlay.png", position=game.at(5,3))
+const menuMusic = new Visual(image="botonMusic.png", position=game.at(5,2))
 const menuDificulties = new Visual(image="menuDificulties.png", position=game.at(4,2))
 const easy = new Visual(image="easy.png", position=game.at(4,4))
 const medium = new Visual(image="normal.png", position=game.at(4,3))
