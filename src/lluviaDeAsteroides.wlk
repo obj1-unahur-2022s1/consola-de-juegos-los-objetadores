@@ -89,6 +89,10 @@ object partida {
 		keyboard.z().onPressDo { nave.activarModoCombate() }
 		keyboard.x().onPressDo { nave.disparar() }
 		
+		game.addVisual(object{method position()= game.origin() method text() = "        score:    "+nave.asteroidesRotos()})
+	
+		
+		
 		game.onTick(dificultades.get(1), "Crear Asteroide grande/mediano", { 
 			const asteroide = new Asteroide(position=game.at(0.randomUpTo(16),25),image=imagenesAsteroidesGrandes.anyOne())
 			game.addVisual(asteroide)
@@ -164,6 +168,7 @@ object nave {
 	var property position = game.at(7,1)
 	var property image = "naveBase.png"
 	var property modoCombate = false
+	var property asteroidesRotos = 0
 	
 	//acciones de la nave vida 
 	method chocar(elemento){
@@ -200,10 +205,12 @@ class Asteroide {
 	const property velocidades = [600, 400, 200]
 	const property imagenAux = image
 	
+	
 	//colision
 	method auxiliarDespuesChoque(){
 		self.volverALaOriginal()
 		self.moverPosicionLuegoDeChoque()
+		nave.asteroidesRotos(nave.asteroidesRotos()+1)
 		game.removeTickEvent("choque asteroide")
 	}
 	method cambiarLaImagen(){
@@ -213,7 +220,7 @@ class Asteroide {
 		self.image(imagenAux)
 	}
 	method moverPosicionLuegoDeChoque(){
-		self.position(new Position(x=0.randomUpTo(game.width()).truncate(0), y =21.randomUpTo(25).truncate(0)))
+		self.position(new Position(x=0.randomUpTo(game.width()).truncate(0), y =12.randomUpTo(14).truncate(0)))
 	}
 	method metodosChoques(){
 		self.cambiarLaImagen()
