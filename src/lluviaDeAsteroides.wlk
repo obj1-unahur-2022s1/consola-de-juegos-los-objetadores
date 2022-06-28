@@ -89,7 +89,7 @@ object partida {
 		keyboard.z().onPressDo { nave.activarModoCombate() }
 		keyboard.x().onPressDo { nave.disparar() }
 		
-		game.addVisual(object{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()})
+		game.addVisual(score)
 	
 		
 		
@@ -104,8 +104,8 @@ object partida {
 			game.addVisual(asteroide)
 			asteroide.iniciarMovimiento(asteroide.velocidades().anyOne())
 		})
-		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide)elemento.metodosChoques()})
-		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=fondoAsteroide)elemento.metodosChoques()})
+		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)elemento.metodosChoques()})
+		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)elemento.metodosChoques()})
 		
  }
  
@@ -319,4 +319,4 @@ const menuDificulties = new Visual(image="menuDificulties.png", position=game.at
 const easy = new Visual(image="easy.png", position=game.at(4,4))
 const medium = new Visual(image="normal.png", position=game.at(4,3))
 const hard = new Visual(image="hard.png", position=game.at(4,2))
-
+object score{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()}
