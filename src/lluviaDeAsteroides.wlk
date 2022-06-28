@@ -89,7 +89,7 @@ object partida {
 		keyboard.z().onPressDo { nave.activarModoCombate() }
 		keyboard.x().onPressDo { nave.disparar() }
 		
-		game.addVisual(object{method position()= game.origin() method text() = "        score:    "+nave.asteroidesRotos()})
+		game.addVisual(object{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()})
 	
 		
 		
