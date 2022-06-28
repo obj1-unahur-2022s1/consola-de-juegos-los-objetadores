@@ -197,6 +197,17 @@ object nave {
 	method explotar(){
 		game.removeVisual(self)
 		game.removeVisual(laser)
+		game.addVisual(reinicioMensaje)
+		game.addVisual(consolaMensaje)
+		game.addVisual(menuMensaje)
+		game.onTick(7000,"opciones",{self.removerVisualesAux()})
+	}
+	
+	method removerVisualesAux(){
+		game.removeVisual(reinicioMensaje)
+		game.removeVisual(consolaMensaje)
+		game.removeVisual(menuMensaje)
+		game.removeTickEvent("opciones")
 	}
 	
 	method decirVidas(){
@@ -349,3 +360,7 @@ const easy = new Visual(image="easy.png", position=game.at(4,4))
 const medium = new Visual(image="normal.png", position=game.at(4,3))
 const hard = new Visual(image="hard.png", position=game.at(4,2))
 object score{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()}
+
+object reinicioMensaje{method position()= new Position(x=5,y=5) method text() = "presione r para reiniciar"}
+object consolaMensaje{method position()= new Position(x=5,y=7) method text() = "presione q para ir a la consola"}
+object menuMensaje{method position()= new Position(x=5,y=6) method text() = "presione m para ir al menu"}
