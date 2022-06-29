@@ -104,6 +104,13 @@ object partida {
 			game.addVisual(asteroide)
 			asteroide.iniciarMovimiento(asteroide.velocidades().anyOne())
 		})
+		
+		game.onTick(10000, "Crear astronauta", { 
+			const astronauta = new Astronauta(position=game.at(0.randomUpTo(16),25))
+			game.addVisual(astronauta)
+			astronauta.iniciarMovimiento()
+        })
+		
 		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)elemento.metodosChoques()});
 		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)elemento.metodosChoques()});
 		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)nave.chocar(elemento)});
@@ -228,16 +235,22 @@ object nave {
 	}
 } 
 
-class Vida // FALTA TERMINAR
+class Astronauta
 	{
  var property position 
- var property image
+ var property image = "vidaAstronauta.png"
  	
- 	method chocar()
+ 	method iniciarMovimiento()
  		{
+ 		game.onTick(200, "mover asteroide", { self.mover() })
+ 		}
  		
- 		} 
-	}
+ 	method mover()
+ 		{
+ 		position = position.down(1)
+	 // if (position.y() == -4) { game.removeVisual(self) }
+ 		}
+    }
 	
 class Asteroide {
 	var property position 
@@ -341,9 +354,9 @@ const fondoEspacio = new Visual(image="fondoPartida.jpg", position=game.at(0,0))
 const fondoMenu = new Visual(image="fondoMenu.jpg", position=game.at(0,0))
 const fondoAsteroide = new Visual(image="fondoAsteroides.png", position=game.at(0,0))
 const astronautaMenu = new Visual(image="astronautaMenu.png", position=game.at(1,4))
-const astronautaPuntuacion1 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,4))
-const astronautaPuntuacion2 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,5))
-const astronautaPuntuacion3 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,6))
+//const astronautaPuntuacion1 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,4))
+//const astronautaPuntuacion2 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,5))
+//const astronautaPuntuacion3 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,6))
 
 const puntuacionAstronauta = new Visual(image="astronautaPuntuacion.png" ,position=game.at(0, game.height() - 2 ))
 
@@ -364,3 +377,4 @@ object score{method position()= new Position(x=0,y=11) method text() = "        
 object reinicioMensaje{method position()= new Position(x=5,y=5) method text() = "presione r para reiniciar"}
 object consolaMensaje{method position()= new Position(x=5,y=7) method text() = "presione q para ir a la consola"}
 object menuMensaje{method position()= new Position(x=5,y=6) method text() = "presione m para ir al menu"}
+
