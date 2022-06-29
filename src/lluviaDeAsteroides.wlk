@@ -1,5 +1,7 @@
 import wollok.game.*
 import consola.*
+import objetos.*
+import visuales.*
 
 class Juego {
 	var property position = null
@@ -30,11 +32,10 @@ object juegoAsteroide {
 	
 }
 
-
 // INICIO
 
 object partida {
-	const dificultades = [dificultad.facil(), dificultad.medio(), dificultad.dificil()]
+	const dificultades = [ 800, 600, 400 ]
 	
 	method terminar(){
 		
@@ -91,8 +92,6 @@ object partida {
 		
 		game.addVisual(score)
 	
-		
-		
 		game.onTick(dificultades.get(1), "Crear Asteroide grande/mediano", { 
 			const asteroide = new Asteroide(position=game.at(0.randomUpTo(16),25),image=imagenesAsteroidesGrandes.anyOne())
 			game.addVisual(asteroide)
@@ -112,7 +111,11 @@ object partida {
         })
 		
 		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)elemento.metodosChoques()});
-		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)elemento.metodosChoques()});
+		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score) {
+			elemento.metodosChoques()
+			laser.position(nave.position())
+			}
+		});
 		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)nave.chocar(elemento)});
 		
  }
@@ -155,226 +158,4 @@ object partida {
 }
 
 
-
-object dificultad {
-	method facil() = 8000
-	method medio() = 5000
-	method dificil() = 3000
-	// FALTA TERMINAR !!!!
-/* 	method seleccionarDificultad() {
-		keyboard.e().onPressDo(partida.jugar(facil))
-		
-		keyboard.m().onPressDo(partida.jugar(medio))
-		
-		keyboard.h().onPressDo(partida.jugar(dificil))
-	}*/
-}
-
-// OBJETOS
-
-object laser {
-	var property position =nave.position()
-	const property image = "laserChicoFinal.png"
-	
-	method disparar() {
-		game.onTick(50, "disparar",{ self.mover() })
-	}
-	
-	method mover() {
-		position = position.up(1)
-		if (position.y() == 25) { 
-			position = nave.position()
-			game.removeTickEvent("disparar")
-		}
-	}
-}
-
-object nave {
-	var property position = game.at(7,1)
-	var property image = "naveBase.png"
-	var property modoCombate = false
-	var property asteroidesRotos = 0
-	var property vidas = 6
-	
-	//acciones de la nave vida 
-	method chocar(elemento){
-		if(self.vidas() == 0){self.explotar()}else{vidas = 0.max(vidas-1);}
-	}
-	
-	method explotar(){
-		game.removeVisual(self)
-		game.removeVisual(laser)
-		game.addVisual(reinicioMensaje)
-		game.addVisual(consolaMensaje)
-		game.addVisual(menuMensaje)
-		game.onTick(7000,"opciones",{self.removerVisualesAux()})
-	}
-	
-	method removerVisualesAux(){
-		game.removeVisual(reinicioMensaje)
-		game.removeVisual(consolaMensaje)
-		game.removeVisual(menuMensaje)
-		game.removeTickEvent("opciones")
-	}
-	
-	method decirVidas(){
-		game.say(self,"tengo "+self.vidas()+" vidas")	
-	}
-	
-	//
-	method activarModoCombate() {
-		if (not modoCombate) {
-			modoCombate = true
-			image = "naveCombate.png"
-		}
-	}
-	method disparar() { 
-		if (modoCombate) {
-			laser.disparar()
-		}
-	}
-} 
-
-class Astronauta
-	{
- var property position 
- var property image = "vidaAstronauta.png"
- 	
- 	method iniciarMovimiento()
- 		{
- 		game.onTick(200, "mover asteroide", { self.mover() })
- 		}
- 		
- 	method mover()
- 		{
- 		position = position.down(1)
-	 // if (position.y() == -4) { game.removeVisual(self) }
- 		}
-    }
-	
-class Asteroide {
-	var property position 
-	var property image 
-	const property velocidades = [600, 400, 200]
-	const property imagenAux = image
-	
-	
-	//colision
-	method auxiliarDespuesChoque(){
-		self.volverALaOriginal()
-		self.moverPosicionLuegoDeChoque()
-		nave.asteroidesRotos(nave.asteroidesRotos()+1)
-		game.removeTickEvent("choque asteroide")
-	}
-	method cambiarLaImagen(){
-		self.image("asteroideRoto.png")
-	}
-	method volverALaOriginal(){
-		self.image(imagenAux)
-	}
-	method moverPosicionLuegoDeChoque(){
-		self.position(new Position(x=0.randomUpTo(game.width()).truncate(0), y =12.randomUpTo(14).truncate(0)))
-	}
-	method metodosChoques(){
-		self.cambiarLaImagen()
-		self.chocar()
-	}
-	method chocar(){
-		game.onTick(100,"choque asteroide",{self.auxiliarDespuesChoque()})
-	}
-	method iniciarMovimiento(unaVelocidad) {
-		game.onTick(unaVelocidad,"mover asteroide",{ self.mover() })
-	}
-	method mover() {
-		position = position.down(1)
-		if (position.y() == -4) { game.removeVisual(self) }
-	}
-}
-
-const izquierda = game.at(20,5.randomUpTo(15))
-const derecha = game.at(-15,5.randomUpTo(15))
-
-class ObjetoVivoEnMenu {
-	const listaDeImg
-	var property position 
-	var property image = listaDeImg.anyOne()
-	const velocidad = [400, 600, 800]
-	
-	method iniciar() {
-		if (position==izquierda)
-			game.onTick(velocidad.anyOne(),"mover izquierda",{ self.moverIzquierda() })
-		else	
-			game.onTick(velocidad.anyOne(),"mover derecha",{ self.moverDerecha() })
-	}
-	method moverIzquierda() {
-		position = position.left(1)
-		if (position.x() == -15) { 
-			image = listaDeImg.anyOne()
-			position = game.at(20,(2..10).anyOne())
-		}
-	}
-	method moverDerecha() {
-		position = position.right(1)
-		if (position.x() == 20) { 
-			image = listaDeImg.anyOne()
-			position = game.at(-15,(2..10).anyOne())
-		}
-	}
-}
-
-const rocaIzquierda = new ObjetoVivoEnMenu(listaDeImg=rocasMenu, position=izquierda)
-const rocaDerecha = new ObjetoVivoEnMenu(listaDeImg=rocasMenu, position=derecha)
-
-// VISUALES
-
-class Visual {
-	var property image
-	var property position = game.origin()
-}
-
-// Imagenes Asteroides grandes y medianos
-
-const imagenesAsteroidesGrandes = ["asteroideAmarillo.png", "asteroideAzul.png", "asteroideCeleste.png", "asteroideRojo.png", 
-		"asteroideRosa.png", "asteroideAmarillo - copia.png", "asteroideAzul - copia.png", "asteroideCeleste - copia.png", "asteroideRojo - copia.png", 
-		"asteroideRosa - copia.png" ]
-		
-// Imagenes Asteroides chicos
-		
-const imagenesAsteroidesChicos = ["asteroideAmarillo1.png", "asteroideAzul1.png", "asteroideCeleste1.png", "asteroideRojo1.png", 
-		"asteroideRosa1.png", "asteroideAmarillo1 - copia.png", "asteroideAzul1 - copia.png", "asteroideCeleste1 - copia.png", "asteroideRojo1 - copia.png", 
-		"asteroideRosa1 - copia.png" ]
-
-// Piedras menu
-
-const rocasMenu = ["piedrasMenu2.png", "piedrasMenu3.png", "piedrasMenu1.png", "piedrasMenu4.png", "piedrasMenu5.png",
-	"piedrasMenu6.png","piedrasMenu7.png","piedrasMenu8.png"]
-
-const mute = new Visual(image="mute.png", position=game.at(1,1))
-const fondoEspacio = new Visual(image="fondoPartida.jpg", position=game.at(0,0))
-const fondoMenu = new Visual(image="fondoMenu.jpg", position=game.at(0,0))
-const fondoAsteroide = new Visual(image="fondoAsteroides.png", position=game.at(0,0))
-const astronautaMenu = new Visual(image="astronautaMenu.png", position=game.at(1,4))
-//const astronautaPuntuacion1 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,4))
-//const astronautaPuntuacion2 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,5))
-//const astronautaPuntuacion3 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,6))
-
-const puntuacionAstronauta = new Visual(image="astronautaPuntuacion.png" ,position=game.at(0, game.height() - 2 ))
-
-// MUSICA
-
-const musicaInicio = new Sound(file="__-___ ____ _ Super Nintendo  Sega Genesis 80s RetroWave Mix (mp3cut.net).mp3")
-
-// Menu Principal y selleccion de dificultad
-
-const menuPlay = new Visual(image="menuPlay.png", position=game.at(5,3))
-const menuMusic = new Visual(image="botonMusic.png", position=game.at(5,2))
-const menuDificulties = new Visual(image="menuDificulties.png", position=game.at(4,2))
-const easy = new Visual(image="easy.png", position=game.at(4,4))
-const medium = new Visual(image="normal.png", position=game.at(4,3))
-const hard = new Visual(image="hard.png", position=game.at(4,2))
-object score{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()}
-
-object reinicioMensaje{method position()= new Position(x=5,y=5) method text() = "presione r para reiniciar"}
-object consolaMensaje{method position()= new Position(x=5,y=7) method text() = "presione q para ir a la consola"}
-object menuMensaje{method position()= new Position(x=5,y=6) method text() = "presione m para ir al menu"}
 
