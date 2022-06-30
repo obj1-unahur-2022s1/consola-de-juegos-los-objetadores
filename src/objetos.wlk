@@ -1,5 +1,6 @@
 import wollok.game.*
 import visuales.*
+import lluviaDeAsteroides.*
 
 object dificultad {
 	const dificultades = [ 800, 600, 400, 300, 100  ]
@@ -15,9 +16,9 @@ object laser {
 	
 	method mover() {
 		position = position.up(1)
-		if (position.y() == 13 or position == nave.position()) { 
-			position = nave.position()
+		if (position.y() == 13) { 
 			game.removeTickEvent("disparar")
+			position = nave.position()
 		}
 	}
 }
@@ -26,15 +27,19 @@ object nave {
 	var property position = game.at(7,1)
 	var property image = "naveBase.png"
 	var property modoCombate = false
+	var property modoInvisible = false
 	var property asteroidesRotos = 0
-	var property vidas = 6
+	const property vidas = [astronautaVida0, astronautaVida1, astronautaVida2 ]
+	const property vidasCombate = [ naveCombatePoder0, naveCombatePoder1, naveCombatePoder2 ]
+	const property vidasInvisibilidad = [ naveInvPoder0, naveInvPoder1, naveInvPoder2 ]
 	
 	//acciones de la nave vida 
 	method chocar(elemento){
-		if(self.vidas() == 0){self.explotar()}else{vidas = 0.max(vidas-1);}
+		if (vidas.size() > 0) { self.quitarUnaVida(vidas) } else { self.explotar() }
 	}
 	
 	method explotar(){
+		self.reiniciarVidas()
 		game.removeVisual(self)
 		game.removeVisual(laser)
 		game.addVisual(reinicioMensaje)
@@ -51,24 +56,52 @@ object nave {
 	}
 	
 	method decirVidas(){
-		game.say(self,"tengo "+self.vidas()+" vidas")	
+		game.say(self,"tengo "+vidas.size().toString()+" vidas")	
 	}
 	
-	//
 	method activarModoCombate() {
-		if (not modoCombate) {
+		if (vidasCombate.size() > 0) {
 			modoCombate = true
 			image = "naveCombate.png"
-			game.schedule(9000, { 
+			self.quitarUnaVida(vidasCombate) 
+			game.schedule(10000, { 
 				modoCombate = false
+				image = "naveBase.png"
+				game.removeVisual(laser)
+			})
+		}
+		else { game.say(self, "No tengo mas poderes") }
+	}
+	
+	method activarModoInvisibilidad() {
+		if (vidasInvisibilidad.size() > 0) {
+			modoInvisible = true
+			image = "naveInvisible.png"
+			self.quitarUnaVida(vidasInvisibilidad) 
+			game.schedule(10000, { 
+				modoInvisible = false
 				image = "naveBase.png"
 			})
 		}
+		else { game.say(self, "No tengo mas poderes") }
 	}
-	method disparar() { 
-		if (modoCombate) {
-			laser.disparar()
-		}
+	
+	method quitarUnaVida(vida) {
+			game.removeVisual(vida.first())
+			vida.remove(vida.first())
+	}
+		
+	method reiniciarVidas() {
+		vidas.clear()
+		vidasCombate.clear()
+		vidasInvisibilidad.clear()
+		vidas.addAll([astronautaVida0, astronautaVida1, astronautaVida2 ])
+		vidasCombate.addAll([ naveCombatePoder0, naveCombatePoder1, naveCombatePoder2 ])
+		vidasInvisibilidad.addAll([ naveInvPoder0, naveInvPoder1, naveInvPoder2 ])
+	}
+	
+	method disparar() {
+		if (modoCombate) { laser.disparar() }
 	}
 } 
 
@@ -79,13 +112,13 @@ class Astronauta
  	
  	method iniciarMovimiento()
  		{
- 		game.onTick(200, "mover asteroide", { self.mover() })
+ 		game.onTick(200, "mover astronauta", { self.mover() })
  		}
  		
  	method mover()
  		{
  		position = position.down(1)
-	 // if (position.y() == -4) { game.removeVisual(self) }
+	    if (position.y() == -4) { game.removeVisual(self) }
  		}
     }
 	

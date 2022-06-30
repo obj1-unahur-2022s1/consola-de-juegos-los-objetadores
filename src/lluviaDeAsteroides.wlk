@@ -38,7 +38,7 @@ object partida {
 	const dificultades = [ 800, 600, 400 ]
 	
 	method terminar(){
-		
+		juegoAsteroide.iniciar()
 	}
 	
 	method iniciar() {
@@ -80,15 +80,18 @@ object partida {
 	method jugar() {
 		game.clear()
 		game.addVisual(fondoEspacio)
-		game.addVisual(fondoAsteroide)
 		game.addVisualCharacter(laser)
 		game.addVisualCharacter(nave)
+		nave.vidasCombate().forEach({ v => game.addVisual(v) })
+		nave.vidas().forEach({ v => game.addVisual(v) })
+		nave.vidasInvisibilidad().forEach({ v => game.addVisual(v) })
 		keyboard.q().onPressDo{self.volverALaConsola()}
 		keyboard.z().onPressDo { nave.activarModoCombate() }
 		keyboard.x().onPressDo { nave.disparar() }
 		keyboard.k().onPressDo {self.irMenu()}
 		keyboard.r().onPressDo {self.reiniciar()}
 		keyboard.v().onPressDo {nave.decirVidas()}
+		keyboard.c().onPressDo {nave.activarModoInvisibilidad()}
 		
 		game.addVisual(score)
 	
@@ -109,14 +112,10 @@ object partida {
 			game.addVisual(astronauta)
 			astronauta.iniciarMovimiento()
         })
-		
-		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)elemento.metodosChoques()});
-		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score) {
-			elemento.metodosChoques()
-			laser.position(nave.position())
-			}
-		});
-		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and elemento!=fondoAsteroide and elemento!=score)nave.chocar(elemento)});
+				
+		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and not nave.modoInvisible())elemento.metodosChoques()});
+		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=score and not nave.modoInvisible()) {elemento.metodosChoques()}});
+		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and not nave.modoInvisible())nave.chocar(elemento)});
 		
  }
  
@@ -139,13 +138,9 @@ object partida {
 	
 	}*/
 	method reiniciar(){
-		game.addVisual(nave)
-		game.addVisual(laser)
-		nave.vidas(6)
-		nave.asteroidesRotos(0)
 		self.jugar()
-		
 	}
+	
 	method irMenu(){
 		self.reiniciar()
 		self.iniciar()

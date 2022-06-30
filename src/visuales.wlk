@@ -6,6 +6,27 @@ class Visual {
 	var property position = game.origin()
 }
 
+// Imagenes juego
+
+// Naves vidas de poderes
+
+const naveCombatePoder0 = new Visual(image="naveCombateContador.png", position=game.at(game.width(), 6))
+const naveCombatePoder1 = new Visual(image="naveCombateContador.png", position=game.at(game.width(), 7))
+const naveCombatePoder2 = new Visual(image="naveCombateContador.png", position=game.at(game.width(), 8))
+
+const naveInvPoder0 = new Visual(image="naveInvisibleContador.png", position=game.at(game.width(), 5))
+const naveInvPoder1 = new Visual(image="naveInvisibleContador.png", position=game.at(game.width(), 4))
+const naveInvPoder2 = new Visual(image="naveInvisibleContador.png", position=game.at(game.width(), 3))
+
+// Vidas astronauta
+
+const astronautaVida0 = new Visual(image="astronautaPuntuacion.png", position=game.at(0, 4))
+const astronautaVida1 = new Visual(image="astronautaPuntuacion.png", position=game.at(0, 5))
+const astronautaVida2 = new Visual(image="astronautaPuntuacion.png", position=game.at(0, 6))
+
+	
+
+
 // Imagenes Asteroides grandes y medianos
 
 const imagenesAsteroidesGrandes = ["asteroideAmarillo.png", "asteroideAzul.png", "asteroideCeleste.png", "asteroideRojo.png", 
@@ -26,7 +47,6 @@ const rocasMenu = ["piedrasMenu2.png", "piedrasMenu3.png", "piedrasMenu1.png", "
 const mute = new Visual(image="mute.png", position=game.at(1,1))
 const fondoEspacio = new Visual(image="fondoPartida.jpg", position=game.at(0,0))
 const fondoMenu = new Visual(image="fondoMenu.jpg", position=game.at(0,0))
-const fondoAsteroide = new Visual(image="fondoAsteroides.png", position=game.at(0,0))
 const astronautaMenu = new Visual(image="astronautaMenu.png", position=game.at(1,4))
 //const astronautaPuntuacion1 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,4))
 //const astronautaPuntuacion2 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,5))
