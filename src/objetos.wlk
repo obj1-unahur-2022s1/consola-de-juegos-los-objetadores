@@ -67,7 +67,6 @@ object nave {
 			game.schedule(10000, { 
 				modoCombate = false
 				image = "naveBase.png"
-				game.removeVisual(laser)
 			})
 		}
 		else { game.say(self, "No tengo mas poderes") }
