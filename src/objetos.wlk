@@ -2,10 +2,6 @@ import wollok.game.*
 import visuales.*
 import lluviaDeAsteroides.*
 
-object dificultad {
-	const dificultades = [ 800, 600, 400, 300, 100  ]
-}
-
 object laser {
 	var property position = nave.position()
 	const property image = "laserChicoFinal.png"
@@ -35,7 +31,11 @@ object nave {
 	
 	//acciones de la nave vida 
 	method chocar(elemento){
-		if (vidas.size() > 0) { self.quitarUnaVida(vidas) } else { self.explotar() }
+		if (vidas.size() > 0) { self.quitarUnaVida(vidas) } 
+		if  (vidas.size() == 1) { 
+			self.quitarUnaVida(vidas)
+			self.explotar()
+		}
 	}
 	
 	method explotar(){
@@ -109,22 +109,20 @@ class Astronauta
  var property position 
  var property image = "vidaAstronauta.png"
  	
- 	method iniciarMovimiento()
- 		{
+ 	method iniciarMovimiento() {
  		game.onTick(200, "mover astronauta", { self.mover() })
- 		}
+ 	}
  		
- 	method mover()
- 		{
+ 	method mover() {
  		position = position.down(1)
 	    if (position.y() == -4) { game.removeVisual(self) }
- 		}
-    }
+ 	}
+}
 	
 class Asteroide {
 	var property position 
 	var property image 
-	const property velocidades = [600, 400, 200]
+	const property velocidades = [120, 50]
 	const property imagenAux = image
 	
 	

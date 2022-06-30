@@ -35,7 +35,7 @@ object juegoAsteroide {
 // INICIO
 
 object partida {
-	const dificultades = [ 800, 600, 400 ]
+	const dificultades = [ 1500, 1000, 700 ]
 	
 	method terminar(){
 		juegoAsteroide.iniciar()
@@ -94,17 +94,17 @@ object partida {
 		keyboard.c().onPressDo {nave.activarModoInvisibilidad()}
 		
 		game.addVisual(score)
-	
-		game.onTick(dificultades.get(1), "Crear Asteroide grande/mediano", { 
+		
+		game.onTick(1500, "Crear Asteroide grande/mediano", { 
 			const asteroide = new Asteroide(position=game.at(0.randomUpTo(16),25),image=imagenesAsteroidesGrandes.anyOne())
 			game.addVisual(asteroide)
-			asteroide.iniciarMovimiento(asteroide.velocidades().anyOne())
+			asteroide.iniciarMovimiento(asteroide.velocidades().first())
 		})
 		
-		game.onTick(dificultades.get(1), "Crear Asteroide chico", { 
+		game.onTick(1500, "Crear Asteroide chico", { 
 			const asteroide = new Asteroide(position=game.at(0.randomUpTo(16),25),image=imagenesAsteroidesChicos.anyOne())
 			game.addVisual(asteroide)
-			asteroide.iniciarMovimiento(asteroide.velocidades().anyOne())
+			asteroide.iniciarMovimiento(asteroide.velocidades().first())
 		})
 		
 		game.onTick(10000, "Crear astronauta", { 
