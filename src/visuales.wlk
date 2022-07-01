@@ -39,6 +39,10 @@ const imagenesAsteroidesChicos = ["asteroideAmarillo1.png", "asteroideAzul1.png"
 		"asteroideRosa1.png", "asteroideAmarillo1 - copia.png", "asteroideAzul1 - copia.png", "asteroideCeleste1 - copia.png", "asteroideRojo1 - copia.png", 
 		"asteroideRosa1 - copia.png" ]
 
+// + mas de los astronautas
+
+const mas10 = new Visual(image="mas10.png", position=game.at(7, 5))
+
 // Piedras menu
 
 const rocasMenu = ["piedrasMenu2.png", "piedrasMenu3.png", "piedrasMenu1.png", "piedrasMenu4.png", "piedrasMenu5.png",

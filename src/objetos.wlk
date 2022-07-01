@@ -119,10 +119,9 @@ object nave {
 	}
 } 
 
-class Astronauta
-	{
- var property position 
- var property image = "vidaAstronauta.png"
+class Astronauta	{
+ 	var property position 
+ 	var property image = "vidaAstronauta.png"
  	
  	method iniciarMovimiento() {
  		game.onTick(200, "mover astronauta", { self.mover() })
@@ -132,7 +131,15 @@ class Astronauta
  		position = position.down(1)
 	    if (position.y() == -4) { game.removeVisual(self) }
  	}
- 	
+ 		
+	method metodosChoques(){
+		game.removeTickEvent("mover astronauta")
+		game.removeVisual(self)
+		game.addVisual(mas10)
+		score.segundos(score.segundos() + 10)
+		game.schedule(2000, { game.removeVisual(mas10)	})
+		
+	}
 }
 	
 class Asteroide {
@@ -202,7 +209,7 @@ object explosion{
 
 object score {
 	
-	var segundos = 0
+	var property segundos = 0
 	
 	method text() ="   Score: "+segundos.toString()
 	method textColor() = "#d714b2"
