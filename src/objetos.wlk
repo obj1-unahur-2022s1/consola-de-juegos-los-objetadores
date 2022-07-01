@@ -32,8 +32,7 @@ object nave {
 	//acciones de la nave vida 
 	method chocar(elemento){
 		if (vidas.size() > 0) { self.quitarUnaVida(vidas) } 
-		if  (vidas.size() == 1) { 
-			self.quitarUnaVida(vidas)
+		if  (vidas.size() == 0) { 
 			self.explotar()
 		}
 	}
@@ -103,6 +102,7 @@ object nave {
 		if (modoCombate) { laser.disparar() }
 	}
 	method configReinicio(){
+		self.asteroidesRotos(0)
 		self.modoCombate(false)
 		self.image("naveBase.png")
 	}
