@@ -47,13 +47,13 @@ object partida {
 		game.height(17)
 		game.cellSize(50)
 		game.addVisual(fondoMenu)
-		self.moverRocasMenu()
+		//self.moverRocasMenu()
 		game.addVisual(astronautaMenu)
 		self.iniciarMenu()
 		self.musica()
 		keyboard.space().onPressDo {self.jugar()}
 	}
-
+	
 	method moverRocasMenu() {
 		game.addVisual(rocaIzquierda)
 		game.addVisual(rocaDerecha)
@@ -94,21 +94,22 @@ object partida {
 		keyboard.c().onPressDo {nave.activarModoInvisibilidad()}
 		
 		game.addVisual(score)
+		score.iniciar()
 		
 		game.onTick(1500, "Crear Asteroide grande/mediano", { 
-			const asteroide = new Asteroide(position=game.at(0.randomUpTo(16),25),image=imagenesAsteroidesGrandes.anyOne())
+			const asteroide = new Asteroide(position=game.at(0.randomUpTo(16),13),image=imagenesAsteroidesGrandes.anyOne())
 			game.addVisual(asteroide)
 			asteroide.iniciarMovimiento(asteroide.velocidades().first())
 		})
 		
 		game.onTick(1500, "Crear Asteroide chico", { 
-			const asteroide = new Asteroide(position=game.at(0.randomUpTo(16),25),image=imagenesAsteroidesChicos.anyOne())
+			const asteroide = new Asteroide(position=game.at(0.randomUpTo(16),13),image=imagenesAsteroidesChicos.anyOne())
 			game.addVisual(asteroide)
 			asteroide.iniciarMovimiento(asteroide.velocidades().first())
 		})
 		
 		game.onTick(10000, "Crear astronauta", { 
-			const astronauta = new Astronauta(position=game.at(0.randomUpTo(16),25))
+			const astronauta = new Astronauta(position=game.at(0.randomUpTo(16),13))
 			game.addVisual(astronauta)
 			astronauta.iniciarMovimiento()
         })
@@ -117,7 +118,7 @@ object partida {
 		game.onCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and not nave.modoInvisible() and elemento!=score and elemento!=astronautaVida0 and elemento!=astronautaVida1 and elemento!=astronautaVida2)elemento.metodosChoques()});
 		game.onCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=score and not nave.modoInvisible() and elemento!=astronautaVida0 and elemento!=astronautaVida1 and elemento!=astronautaVida2) {elemento.metodosChoques()}});
 		game.onCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and not nave.modoInvisible() and elemento!=score and elemento!=astronautaVida0 and elemento!=astronautaVida1 and elemento!=astronautaVida2 and self.elementoNoEsMensajesFinal(elemento))nave.chocar(elemento)});
- 			
+ 	
 	 }
 	 
 	method elementoNoEsMensajesFinal(elemento) = elemento!=reinicioMensaje and elemento!=consolaMensaje and elemento!=menuMensaje

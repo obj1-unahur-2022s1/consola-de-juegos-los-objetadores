@@ -20,7 +20,7 @@ object laser {
 }
 
 object nave {
-	var property position = game.at(7,1)
+	var property position = game.at(8,1)
 	var property image = "naveBase.png"
 	var property modoCombate = false
 	var property modoInvisible = false
@@ -199,6 +199,33 @@ object explosion{
 		game.schedule(1200,{game.removeVisual(self)})
 	}
 }
+
+object score {
+	
+	var segundos = 0
+	
+	method text() ="   Score: "+segundos.toString()
+	method textColor() = "#d714b2"
+	method position() = game.at(0, 10)
+	
+	method pasarTiempo() {
+		segundos = segundos +1
+	}
+	method iniciar(){
+		segundos = 0
+		game.onTick(1000,"tiempo",{self.pasarTiempo()})
+	}
+	method detener(){
+		game.removeTickEvent("tiempo")
+	}
+}
+/*
+object score {
+	method position()= new Position(x=0,y=10) 
+	method text() = "        score:    "+nave.asteroidesRotos()
+}
+
+*/
 
 class ObjetoVivoEnMenu {
 	const listaDeImg

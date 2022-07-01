@@ -20,9 +20,9 @@ const naveInvPoder2 = new Visual(image="naveInvisibleContador.png", position=gam
 
 // Vidas astronauta
 
-const astronautaVida0 = new Visual(image="astronautaPuntuacion.png", position=game.at(0, 4))
-const astronautaVida1 = new Visual(image="astronautaPuntuacion.png", position=game.at(0, 5))
-const astronautaVida2 = new Visual(image="astronautaPuntuacion.png", position=game.at(0, 6))
+const astronautaVida0 = new Visual(image="astronautaPuntuacion.png", position=game.at(0, 11))
+const astronautaVida1 = new Visual(image="astronautaPuntuacion.png", position=game.at(1, 11))
+const astronautaVida2 = new Visual(image="astronautaPuntuacion.png", position=game.at(2, 11))
 
 	
 
@@ -45,7 +45,7 @@ const rocasMenu = ["piedrasMenu2.png", "piedrasMenu3.png", "piedrasMenu1.png", "
 	"piedrasMenu6.png","piedrasMenu7.png","piedrasMenu8.png"]
 
 const mute = new Visual(image="mute.png", position=game.at(1,1))
-const fondoEspacio = new Visual(image="fondoPartida.jpg", position=game.at(0,0))
+const fondoEspacio = new Visual(image="fondoPartida.png", position=game.at(0,0))
 const fondoMenu = new Visual(image="fondoMenu.jpg", position=game.at(0,0))
 const astronautaMenu = new Visual(image="astronautaMenu.png", position=game.at(1,4))
 //const astronautaPuntuacion1 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,4))
@@ -67,7 +67,6 @@ const easy = new Visual(image="easy.png", position=game.at(4,4))
 const medium = new Visual(image="normal.png", position=game.at(4,3))
 const hard = new Visual(image="hard.png", position=game.at(4,2))
 const gameOver = new Visual(image="gameOver.png",position=game.at(7,5))
-object score{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()}
 
 object reinicioMensaje{method position()= new Position(x=5,y=5) method text() = "presione r para reiniciar"}
 object consolaMensaje{method position()= new Position(x=5,y=7) method text() = "presione q para ir a la consola"}
