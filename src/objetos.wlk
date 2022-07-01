@@ -44,14 +44,19 @@ object nave {
 		game.addVisual(reinicioMensaje)
 		game.addVisual(consolaMensaje)
 		game.addVisual(menuMensaje)
-		game.onTick(7000,"opciones",{self.removerVisualesAux()})
+		game.addVisual(gameOver)
+		game.schedule(10000,{self.sacarGameOver()})
+		game.schedule(7000,{self.removerVisualesAux()})
+	}
+	
+	method sacarGameOver(){
+		game.removeVisual(gameOver)
 	}
 	
 	method removerVisualesAux(){
 		game.removeVisual(reinicioMensaje)
 		game.removeVisual(consolaMensaje)
 		game.removeVisual(menuMensaje)
-		game.removeTickEvent("opciones")
 	}
 	
 	method decirVidas(){
