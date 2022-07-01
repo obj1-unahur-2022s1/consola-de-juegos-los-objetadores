@@ -102,6 +102,10 @@ object nave {
 	method disparar() {
 		if (modoCombate) { laser.disparar() }
 	}
+	method configReinicio(){
+		self.modoCombate(false)
+		self.image("naveBase.png")
+	}
 } 
 
 class Astronauta

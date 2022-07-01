@@ -88,7 +88,7 @@ object partida {
 		keyboard.q().onPressDo{self.volverALaConsola()}
 		keyboard.z().onPressDo { nave.activarModoCombate() }
 		keyboard.x().onPressDo { nave.disparar() }
-		keyboard.k().onPressDo {self.irMenu()}
+		keyboard.m().onPressDo {self.irMenu()}
 		keyboard.r().onPressDo {self.reiniciar()}
 		keyboard.v().onPressDo {nave.decirVidas()}
 		keyboard.c().onPressDo {nave.activarModoInvisibilidad()}
@@ -113,9 +113,9 @@ object partida {
 			astronauta.iniciarMovimiento()
         })
 				
-		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and not nave.modoInvisible())elemento.metodosChoques()});
-		game.whenCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=score and not nave.modoInvisible()) {elemento.metodosChoques()}});
-		game.whenCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and not nave.modoInvisible())nave.chocar(elemento)});
+		game.onCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and not nave.modoInvisible())elemento.metodosChoques()});
+		game.onCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=score and not nave.modoInvisible()) {elemento.metodosChoques()}});
+		game.onCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and not nave.modoInvisible())nave.chocar(elemento)});
 		
  }
  
@@ -138,6 +138,7 @@ object partida {
 	
 	}*/
 	method reiniciar(){
+		nave.configReinicio()
 		self.jugar()
 	}
 	
