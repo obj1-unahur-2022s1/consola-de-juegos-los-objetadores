@@ -37,9 +37,10 @@ object nave {
 		}
 	}
 	
+	
 	method explotar(){
 		self.reiniciarVidas()
-		game.removeVisual(self)
+		explosion.animacionExplosion()
 		game.removeVisual(laser)
 		game.addVisual(reinicioMensaje)
 		game.addVisual(consolaMensaje)
@@ -93,6 +94,8 @@ object nave {
 			game.removeVisual(vida.first())
 			vida.remove(vida.first())
 	}
+	
+	
 		
 	method reiniciarVidas() {
 		vidas.clear()
@@ -129,6 +132,7 @@ class Astronauta
  		position = position.down(1)
 	    if (position.y() == -4) { game.removeVisual(self) }
  	}
+ 	
 }
 	
 class Asteroide {
@@ -172,6 +176,29 @@ class Asteroide {
 
 const izquierda = game.at(20,5.randomUpTo(15))
 const derecha = game.at(-15,5.randomUpTo(15))
+
+object explosion{
+	var property image = "explosion1.png"
+	var  property position = nave.position()
+	
+	method animacionExplosion(){
+		game.removeVisual(nave)
+		self.position(nave.position())
+		game.addVisual(self)
+		game.schedule(100,{self.image("explosion2.png")})
+		game.schedule(200,{self.image("explosion3.png")})
+		game.schedule(300,{self.image("explosion4.png")})
+		game.schedule(400,{self.image("explosion5.png")})
+		game.schedule(500,{self.image("explosion6.png")})
+		game.schedule(600,{self.image("explosion7.png")})
+		game.schedule(700,{self.image("explosion8.png")})
+		game.schedule(800,{self.image("explosion9.png")})
+		game.schedule(900,{self.image("explosion10.png")})
+		game.schedule(1000,{self.image("explosion11.png")})
+		game.schedule(1100,{self.image("explosion12.png")})
+		game.schedule(1200,{game.removeVisual(self)})
+	}
+}
 
 class ObjetoVivoEnMenu {
 	const listaDeImg
