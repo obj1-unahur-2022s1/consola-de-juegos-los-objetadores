@@ -46,7 +46,7 @@ object nave {
 		game.addVisual(menuMensaje)
 		game.addVisual(gameOver)
 		game.schedule(10000,{self.sacarGameOver()})
-		game.schedule(7000,{self.removerVisualesAux()})
+		game.schedule(10000,{self.removerVisualesAux()})
 	}
 	
 	method sacarGameOver(){
@@ -107,6 +107,9 @@ object nave {
 		if (modoCombate) { laser.disparar() }
 	}
 	method configReinicio(){
+		self.reiniciarVidas()
+		self.position(game.at(7,1))
+		laser.position(self.position())
 		self.asteroidesRotos(0)
 		self.modoCombate(false)
 		self.image("naveBase.png")
