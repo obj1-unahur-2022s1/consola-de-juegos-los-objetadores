@@ -18,28 +18,14 @@ class Juego {
 	
 }
 
+// INICIO
+
 object juegoAsteroide {
 	var property position = null
 	
-	method iniciar(){
-    	partida.iniciar() 	   
-    }
+	const visualesFinalJuego = [ reinicioMensaje, consolaMensaje, menuMensaje, gameOver ]
 	
-	method terminar(){
-		
-	}
 	method image() = "iconoJuego.png"
-	
-}
-
-// INICIO
-
-object partida {
-	const dificultades = [ 1500, 1000, 700 ]
-	
-	method terminar(){
-		juegoAsteroide.iniciar()
-	}
 	
 	method iniciar() {
 		game.title("Naves Espaciales")
@@ -80,20 +66,18 @@ object partida {
 	method jugar() {
 		game.clear()
 		game.addVisual(fondoEspacio)
+		game.addVisual(score)
 		game.addVisualCharacter(laser)
 		game.addVisualCharacter(nave)
 		nave.vidasCombate().forEach({ v => game.addVisual(v) })
 		nave.vidas().forEach({ v => game.addVisual(v) })
 		nave.vidasInvisibilidad().forEach({ v => game.addVisual(v) })
+		
 		keyboard.q().onPressDo{self.volverALaConsola()}
-		keyboard.z().onPressDo { nave.activarModoCombate() }
-		keyboard.x().onPressDo { nave.disparar() }
 		keyboard.m().onPressDo {self.irMenu()}
 		keyboard.r().onPressDo {self.reiniciar()}
-		keyboard.v().onPressDo {nave.decirVidas()}
-		keyboard.c().onPressDo {nave.activarModoInvisibilidad()}
 		
-		game.addVisual(score)
+		nave.iniciar()
 		score.iniciar()
 		
 		game.onTick(1500, "Crear Asteroide grande/mediano", { 
@@ -122,7 +106,15 @@ object partida {
 	 }
 	 
 	method elementoNoEsMensajesFinal(elemento) = elemento!=reinicioMensaje and elemento!=consolaMensaje and elemento!=menuMensaje
- 
+ 	
+ 	method terminar() {
+ 		game.removeVisual(laser)
+ 		score.detener()
+		visualesFinalJuego.forEach({ v => game.addVisual(v) })
+		game.schedule(15000, {visualesFinalJuego.forEach({ v => game.removeVisual(v) })})
+		
+ 	}
+ 	
  	method iniciarMenu(){
 		game.addVisual(menuPlay)
 		game.addVisual(menuMusic)

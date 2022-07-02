@@ -29,6 +29,14 @@ object nave {
 	const property vidasCombate = [ naveCombatePoder0, naveCombatePoder1, naveCombatePoder2 ]
 	const property vidasInvisibilidad = [ naveInvPoder0, naveInvPoder1, naveInvPoder2 ]
 	
+	method iniciar() {
+		keyboard.x().onPressDo { self.disparar() }
+		keyboard.v().onPressDo { self.decirVidas()}
+		keyboard.c().onPressDo { self.activarModoInvisibilidad()}
+		keyboard.z().onPressDo { self.activarModoCombate() }
+	}
+	
+	
 	//acciones de la nave vida 
 	method chocar(elemento){
 		if (vidas.size() > 0) { self.quitarUnaVida(vidas) } 
@@ -37,27 +45,10 @@ object nave {
 		}
 	}
 	
-	
 	method explotar(){
 		self.reiniciarVidas()
 		explosion.animacionExplosion()
-		game.removeVisual(laser)
-		game.addVisual(reinicioMensaje)
-		game.addVisual(consolaMensaje)
-		game.addVisual(menuMensaje)
-		game.addVisual(gameOver)
-		game.schedule(10000,{self.sacarGameOver()})
-		game.schedule(10000,{self.removerVisualesAux()})
-	}
-	
-	method sacarGameOver(){
-		game.removeVisual(gameOver)
-	}
-	
-	method removerVisualesAux(){
-		game.removeVisual(reinicioMensaje)
-		game.removeVisual(consolaMensaje)
-		game.removeVisual(menuMensaje)
+		juegoAsteroide.terminar()
 	}
 	
 	method decirVidas(){
@@ -91,12 +82,10 @@ object nave {
 	}
 	
 	method quitarUnaVida(vida) {
-			game.removeVisual(vida.first())
-			vida.remove(vida.first())
+			game.removeVisual(vida.last())
+			vida.remove(vida.last())
 	}
 	
-	
-		
 	method reiniciarVidas() {
 		vidas.clear()
 		vidasCombate.clear()
@@ -211,9 +200,9 @@ object score {
 	
 	var property segundos = 0
 	
-	method text() ="   Score: "+segundos.toString()
+	method text() = segundos.toString()
 	method textColor() = "#d714b2"
-	method position() = game.at(0, 10)
+	method position() = game.at(0, 8)
 	
 	method pasarTiempo() {
 		segundos = segundos +1
@@ -226,13 +215,7 @@ object score {
 		game.removeTickEvent("tiempo")
 	}
 }
-/*
-object score {
-	method position()= new Position(x=0,y=10) 
-	method text() = "        score:    "+nave.asteroidesRotos()
-}
 
-*/
 
 class ObjetoVivoEnMenu {
 	const listaDeImg

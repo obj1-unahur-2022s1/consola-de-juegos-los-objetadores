@@ -20,9 +20,9 @@ const naveInvPoder2 = new Visual(image="naveInvisibleContador.png", position=gam
 
 // Vidas astronauta
 
-const astronautaVida0 = new Visual(image="astronautaPuntuacion.png", position=game.at(0, 11))
-const astronautaVida1 = new Visual(image="astronautaPuntuacion.png", position=game.at(1, 11))
-const astronautaVida2 = new Visual(image="astronautaPuntuacion.png", position=game.at(2, 11))
+const astronautaVida0 = new Visual(image="astronautaPuntuacion.png", position=game.at(0, 10))
+const astronautaVida1 = new Visual(image="astronautaPuntuacion.png", position=game.at(1, 10))
+const astronautaVida2 = new Visual(image="astronautaPuntuacion.png", position=game.at(2, 10))
 
 	
 
