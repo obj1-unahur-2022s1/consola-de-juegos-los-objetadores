@@ -122,8 +122,8 @@ class Astronauta	{
  	}
  		
 	method metodosChoques(){
-		game.removeTickEvent("mover astronauta")
 		game.removeVisual(self)
+		game.removeTickEvent("mover astronauta")
 		game.addVisual(mas10)
 		score.segundos(score.segundos() + 10)
 		game.schedule(2000, { game.removeVisual(mas10)	})
