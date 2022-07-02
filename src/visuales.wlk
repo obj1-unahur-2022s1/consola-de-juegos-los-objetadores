@@ -70,8 +70,8 @@ const menuDificulties = new Visual(image="menuDificulties.png", position=game.at
 const easy = new Visual(image="easy.png", position=game.at(4,4))
 const medium = new Visual(image="normal.png", position=game.at(4,3))
 const hard = new Visual(image="hard.png", position=game.at(4,2))
-const gameOver = new Visual(image="gameOver.png",position=game.at(7,5))
+const gameOver = new Visual(image="gameOver.png",position=game.at(4,6))
 
-object reinicioMensaje{method position()= new Position(x=5,y=5) method text() = "presione r para reiniciar"}
-object consolaMensaje{method position()= new Position(x=5,y=7) method text() = "presione q para ir a la consola"}
-object menuMensaje{method position()= new Position(x=5,y=6) method text() = "presione m para ir al menu"}
+object reinicioMensaje{method position()= new Position(x=5,y=5) method image() = "reiniciar.png"}
+object consolaMensaje{method position()= new Position(x=5,y=4) method image() = "irConsola.png"}
+object menuMensaje{method position()= new Position(x=5,y=3) method image() = "irMenu.png"}
