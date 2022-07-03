@@ -33,9 +33,8 @@ object juegoAsteroide {
 		game.height(17)
 		game.addVisual(fondoMenu)
 		game.addVisual(astronautaMenu)
-		//self.iniciarMenu()
+		self.iniciarMenu()
 		musica.inicio().play()
-		keyboard.space().onPressDo {self.jugar()}
 	}
 	
 	method jugar(unaDificultad) {
@@ -143,7 +142,7 @@ object juegoAsteroide {
 
 	method reiniciar(){
 		nave.configReinicio()
-		self.jugar()
+		self.jugar(0)
 	}
 	
 	method irMenu(){
@@ -158,7 +157,7 @@ object juegoAsteroide {
 
 	method ayuda(){
 		game.removeVisual(help)
-		
+
 		game.addVisual(help1)
 		game.addVisual(help2)
 	}
