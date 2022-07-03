@@ -6,6 +6,27 @@ class Visual {
 	var property position = game.origin()
 }
 
+// Imagenes juego
+
+// Naves vidas de poderes
+
+const naveCombatePoder0 = new Visual(image="naveCombateContador.png", position=game.at(game.width(), 6))
+const naveCombatePoder1 = new Visual(image="naveCombateContador.png", position=game.at(game.width(), 7))
+const naveCombatePoder2 = new Visual(image="naveCombateContador.png", position=game.at(game.width(), 8))
+
+const naveInvPoder0 = new Visual(image="naveInvisibleContador.png", position=game.at(game.width(), 5))
+const naveInvPoder1 = new Visual(image="naveInvisibleContador.png", position=game.at(game.width(), 4))
+const naveInvPoder2 = new Visual(image="naveInvisibleContador.png", position=game.at(game.width(), 3))
+
+// Vidas astronauta
+
+const astronautaVida0 = new Visual(image="astronautaPuntuacion.png", position=game.at(0, 10))
+const astronautaVida1 = new Visual(image="astronautaPuntuacion.png", position=game.at(1, 10))
+const astronautaVida2 = new Visual(image="astronautaPuntuacion.png", position=game.at(2, 10))
+
+	
+
+
 // Imagenes Asteroides grandes y medianos
 
 const imagenesAsteroidesGrandes = ["asteroideAmarillo.png", "asteroideAzul.png", "asteroideCeleste.png", "asteroideRojo.png", 
@@ -18,15 +39,18 @@ const imagenesAsteroidesChicos = ["asteroideAmarillo1.png", "asteroideAzul1.png"
 		"asteroideRosa1.png", "asteroideAmarillo1 - copia.png", "asteroideAzul1 - copia.png", "asteroideCeleste1 - copia.png", "asteroideRojo1 - copia.png", 
 		"asteroideRosa1 - copia.png" ]
 
+// + mas de los astronautas
+
+const mas10 = new Visual(image="mas10.png", position=game.at(7, 5))
+
 // Piedras menu
 
 const rocasMenu = ["piedrasMenu2.png", "piedrasMenu3.png", "piedrasMenu1.png", "piedrasMenu4.png", "piedrasMenu5.png",
 	"piedrasMenu6.png","piedrasMenu7.png","piedrasMenu8.png"]
 
 const mute = new Visual(image="mute.png", position=game.at(1,1))
-const fondoEspacio = new Visual(image="fondoPartida.jpg", position=game.at(0,0))
+const fondoEspacio = new Visual(image="fondoPartida.png", position=game.at(0,0))
 const fondoMenu = new Visual(image="fondoMenu.jpg", position=game.at(0,0))
-const fondoAsteroide = new Visual(image="fondoAsteroides.png", position=game.at(0,0))
 const astronautaMenu = new Visual(image="astronautaMenu.png", position=game.at(1,4))
 //const astronautaPuntuacion1 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,4))
 //const astronautaPuntuacion2 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,5))
@@ -36,7 +60,7 @@ const puntuacionAstronauta = new Visual(image="astronautaPuntuacion.png" ,positi
 
 // MUSICA
 
-const musicaInicio = new Sound(file="__-___ ____ _ Super Nintendo  Sega Genesis 80s RetroWave Mix (mp3cut.net).mp3")
+//const musicaInicio = new Sound(file="__-___ ____ _ Super Nintendo  Sega Genesis 80s RetroWave Mix (mp3cut.net).mp3")
 
 // Menu Principal y selleccion de dificultad
 
@@ -45,13 +69,17 @@ const menuDificulties = new Visual(image="menuDificulties.png", position=game.at
 const easy = new Visual(image="easy.png", position=game.at(4,4))
 const medium = new Visual(image="normal.png", position=game.at(4,3))
 const hard = new Visual(image="hard.png", position=game.at(4,2))
+<<<<<<< HEAD
 
 object help{method position()= new Position(x=15,y=0) method text() = "(h) ayuda"}
 object help1{method position()= new Position(x=15,y=1) method text() = "(z)modo combate"}
 object help2{method position()= new Position(x=15,y=0) method text() = "(x)disparar"}
 
 object score{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()}
+=======
+const gameOver = new Visual(image="gameOver.png",position=game.at(4,6))
+>>>>>>> 244714fd79e094891f66aa0f0abf164d9c0ed7f6
 
-object reinicioMensaje{method position()= new Position(x=5,y=5) method text() = "presione r para reiniciar"}
-object consolaMensaje{method position()= new Position(x=5,y=7) method text() = "presione q para ir a la consola"}
-object menuMensaje{method position()= new Position(x=5,y=6) method text() = "presione m para ir al menu"}
+object reinicioMensaje{method position()= new Position(x=5,y=5) method image() = "reiniciar.png"}
+object consolaMensaje{method position()= new Position(x=5,y=4) method image() = "irConsola.png"}
+object menuMensaje{method position()= new Position(x=5,y=3) method image() = "irMenu.png"}
