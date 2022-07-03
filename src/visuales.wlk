@@ -60,7 +60,7 @@ const puntuacionAstronauta = new Visual(image="astronautaPuntuacion.png" ,positi
 
 // MUSICA
 
-const musicaInicio = new Sound(file="__-___ ____ _ Super Nintendo  Sega Genesis 80s RetroWave Mix (mp3cut.net).mp3")
+//const musicaInicio = new Sound(file="__-___ ____ _ Super Nintendo  Sega Genesis 80s RetroWave Mix (mp3cut.net).mp3")
 
 // Menu Principal y selleccion de dificultad
 

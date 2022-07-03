@@ -8,6 +8,7 @@ object laser {
 	
 	method disparar() {
 		game.onTick(70, "disparar",{ self.mover() })
+		
 	}
 	
 	method mover() {
@@ -36,6 +37,11 @@ object nave {
 		keyboard.z().onPressDo { self.activarModoCombate() }
 	}
 	
+	method iniciarVidas() {
+		self.vidasCombate().forEach({ v => game.addVisual(v) })
+		self.vidas().forEach({ v => game.addVisual(v) })
+		self.vidasInvisibilidad().forEach({ v => game.addVisual(v) })
+	}
 	
 	//acciones de la nave vida 
 	method chocar(elemento){
@@ -96,7 +102,10 @@ object nave {
 	}
 	
 	method disparar() {
-		if (modoCombate) { laser.disparar() }
+		if (modoCombate) { 
+			musica.laser().play()
+			laser.disparar()
+		}
 	}
 	method configReinicio(){
 		self.reiniciarVidas()
@@ -134,10 +143,12 @@ class Astronauta	{
 class Asteroide {
 	var property position 
 	var property image 
-	const property velocidades = [120, 50]
 	const property imagenAux = image
 	
-	
+	method velocidad() = 
+		if (score.segundos().between(0, 50)) {200}
+		else if (score.segundos().between(50, 100)) {120}
+		else {50}
 	//colision
 	method auxiliarDespuesChoque(){
 		self.volverALaOriginal()
@@ -216,34 +227,12 @@ object score {
 	}
 }
 
-
-class ObjetoVivoEnMenu {
-	const listaDeImg
-	var property position 
-	var property image = listaDeImg.anyOne()
-	const velocidad = [400, 600, 800]
-	
-	method iniciar() {
-		if (position==izquierda)
-			game.onTick(velocidad.anyOne(),"mover izquierda",{ self.moverIzquierda() })
-		else	
-			game.onTick(velocidad.anyOne(),"mover derecha",{ self.moverDerecha() })
-	}
-	method moverIzquierda() {
-		position = position.left(1)
-		if (position.x() == -15) { 
-			image = listaDeImg.anyOne()
-			position = game.at(20,(2..10).anyOne())
-		}
-	}
-	method moverDerecha() {
-		position = position.right(1)
-		if (position.x() == 20) { 
-			image = listaDeImg.anyOne()
-			position = game.at(-15,(2..10).anyOne())
-		}
-	}
+object musica {
+	const property inicio = game.sound("musicaInicio.mp3")
+	const property partida = game.sound("musicaPartida.mp3")
+	const property laser = game.sound("laser.mp3")
 }
-
-const rocaIzquierda = new ObjetoVivoEnMenu(listaDeImg=rocasMenu, position=izquierda)
-const rocaDerecha = new ObjetoVivoEnMenu(listaDeImg=rocasMenu, position=derecha)
+	
+	
+	
+	
