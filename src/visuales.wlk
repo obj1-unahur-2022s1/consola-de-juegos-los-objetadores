@@ -69,16 +69,16 @@ const menuDificulties = new Visual(image="menuDificulties.png", position=game.at
 const easy = new Visual(image="easy.png", position=game.at(4,4))
 const medium = new Visual(image="normal.png", position=game.at(4,3))
 const hard = new Visual(image="hard.png", position=game.at(4,2))
-<<<<<<< HEAD
+
 
 object help{method position()= new Position(x=15,y=0) method text() = "(h) ayuda"}
 object help1{method position()= new Position(x=15,y=1) method text() = "(z)modo combate"}
 object help2{method position()= new Position(x=15,y=0) method text() = "(x)disparar"}
 
 object score{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()}
-=======
+
 const gameOver = new Visual(image="gameOver.png",position=game.at(4,6))
->>>>>>> 244714fd79e094891f66aa0f0abf164d9c0ed7f6
+
 
 object reinicioMensaje{method position()= new Position(x=5,y=5) method image() = "reiniciar.png"}
 object consolaMensaje{method position()= new Position(x=5,y=4) method image() = "irConsola.png"}

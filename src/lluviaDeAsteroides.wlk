@@ -21,6 +21,7 @@ class Juego {
 // INICIO
 
 object juegoAsteroide {
+	const dificultades = [dificultad.facil(), dificultad.medio(), dificultad.dificil()]
 	var property position = null
 	const visualesFinalJuego = [ reinicioMensaje, consolaMensaje, menuMensaje, gameOver ]
 		
@@ -32,61 +33,19 @@ object juegoAsteroide {
 		game.height(17)
 		game.addVisual(fondoMenu)
 		game.addVisual(astronautaMenu)
-<<<<<<< HEAD
-		self.iniciarMenu()
-		self.musica()
-=======
 		//self.iniciarMenu()
 		musica.inicio().play()
 		keyboard.space().onPressDo {self.jugar()}
->>>>>>> 244714fd79e094891f66aa0f0abf164d9c0ed7f6
 	}
 	
-<<<<<<< HEAD
-	method musica() {
-		keyboard.p().onPressDo { 
-			musicaInicio.play()
-			musicaInicio.volume(0.5) 
-		}
-		keyboard.s().onPressDo {
-			if (musicaInicio.paused()) { 
-				musicaInicio.resume()
-				game.removeVisual(mute)
-			} 
-			else { 
-				musicaInicio.pause()
-				game.addVisual(mute)
-			}
-		}
-	}
-	method jugar(dificultad) {
-=======
-	method jugar() {
+	method jugar(unaDificultad) {
 		musica.inicio().stop()
->>>>>>> 244714fd79e094891f66aa0f0abf164d9c0ed7f6
 		game.clear()
 		musica.partida().play()
 		game.addVisual(fondoEspacio)
 		game.addVisual(score)
 		game.addVisualCharacter(laser)
 		game.addVisualCharacter(nave)
-<<<<<<< HEAD
-		keyboard.q().onPressDo{self.volverALaConsola()}
-		keyboard.z().onPressDo { nave.activarModoCombate() }
-		keyboard.x().onPressDo { nave.disparar() }
-		keyboard.m().onPressDo {self.irMenu()}
-		keyboard.r().onPressDo {self.reiniciar()}
-		keyboard.v().onPressDo {nave.decirVidas()}
-		keyboard.h().onPressDo{self.ayuda()}
-		
-		game.addVisual(help)
-		
-		
-		game.addVisual(score)
-	
-		game.onTick(dificultades.get(dificultad), "Crear Asteroide grande/mediano", { 
-			const asteroide = new Asteroide(position=game.at(0.randomUpTo(16),25),image=imagenesAsteroidesGrandes.anyOne())
-=======
 		
 		nave.iniciar()
 		score.iniciar()
@@ -105,26 +64,23 @@ object juegoAsteroide {
 				musica.partida().pause()
 			}
 		}
+		keyboard.h().onPressDo{self.ayuda()}
+
+		game.addVisual(help)
 		
-		game.onTick(2500, "Crear Asteroide grande/mediano", { 
+		game.onTick(dificultades.get(unaDificultad), "Crear Asteroide grande/mediano", { 
 			const asteroide = new Asteroide(position=game.at(0.randomUpTo(5),13),image=imagenesAsteroidesGrandes.anyOne())
->>>>>>> 244714fd79e094891f66aa0f0abf164d9c0ed7f6
 			game.addVisual(asteroide)
 			asteroide.iniciarMovimiento(asteroide.velocidad())
 		})
 		
-<<<<<<< HEAD
-		game.onTick(dificultades.get(dificultad), "Crear Asteroide chico", { 
-			const asteroide = new Asteroide(position=game.at(0.randomUpTo(16),25),image=imagenesAsteroidesChicos.anyOne())
-=======
-		game.onTick(1500, "Crear Asteroide chico", { 
+		game.onTick(dificultades.get(unaDificultad), "Crear Asteroide chico", { 
 			const asteroide = new Asteroide(position=game.at(6.randomUpTo(11),13),image=imagenesAsteroidesChicos.anyOne())
->>>>>>> 244714fd79e094891f66aa0f0abf164d9c0ed7f6
 			game.addVisual(asteroide)
 			asteroide.iniciarMovimiento(asteroide.velocidad())
 		})
 		
-		game.onTick(2000, "Crear Asteroide chico", { 
+		game.onTick(dificultades.get(unaDificultad), "Crear Asteroide chico", { 
 			const asteroide = new Asteroide(position=game.at(12.randomUpTo(16),13),image=imagenesAsteroidesChicos.anyOne())
 			game.addVisual(asteroide)
 			asteroide.iniciarMovimiento(asteroide.velocidad())
@@ -156,24 +112,23 @@ object juegoAsteroide {
 		
  	}
  	
- 	/*
+ 	
  	method iniciarMenu(){
- 		
-		game.addVisual(menuDificulties)
+	
 		game.addVisual(menuMusic)
+		game.addVisual(menuDificulties)
 		
 		keyboard.d().onPressDo {self.menuDificultades()}
 	}
 	
-<<<<<<< HEAD
-	method menuDificultades(){
-		
-=======
-	*/
 	
-	/*method menuDificultades(){
-		game.removeVisual(menuPlay)
->>>>>>> 244714fd79e094891f66aa0f0abf164d9c0ed7f6
+	
+	method menuDificultades(){
+
+		method facil() = 800
+		method medio() = 600
+		method dificil() = 400
+		
 		game.removeVisual(menuMusic)
 		game.removeVisual(menuDificulties)
 		
@@ -185,18 +140,10 @@ object juegoAsteroide {
 		keyboard.n().onPressDo {self.jugar(1)}
 		keyboard.h().onPressDo {self.jugar(2)}
 	}
+
 	method reiniciar(){
-<<<<<<< HEAD
-		game.addVisual(nave)
-		game.addVisual(laser)
-		nave.vidas(6)
-		nave.asteroidesRotos(0)
-		self.jugar(0)
-		
-=======
 		nave.configReinicio()
 		self.jugar()
->>>>>>> 244714fd79e094891f66aa0f0abf164d9c0ed7f6
 	}
 	
 	method irMenu(){
@@ -208,15 +155,11 @@ object juegoAsteroide {
 		self.reiniciar()
 		consola.hacerTerminar(self)
 	}
-	
+
 	method ayuda(){
 		game.removeVisual(help)
 		
 		game.addVisual(help1)
 		game.addVisual(help2)
 	}
-
 }
-
-
-
