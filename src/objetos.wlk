@@ -1,9 +1,7 @@
 import wollok.game.*
 import visuales.*
+import lluviaDeAsteroides.*
 
-object dificultad {
-	const dificultades = [ 800, 600, 400, 300, 100  ]
-}
 
 object laser {
 	var property position = nave.position()

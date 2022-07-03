@@ -40,12 +40,16 @@ const musicaInicio = new Sound(file="__-___ ____ _ Super Nintendo  Sega Genesis 
 
 // Menu Principal y selleccion de dificultad
 
-const menuPlay = new Visual(image="menuPlay.png", position=game.at(5,3))
-const menuMusic = new Visual(image="botonMusic.png", position=game.at(5,2))
-const menuDificulties = new Visual(image="menuDificulties.png", position=game.at(4,2))
+const menuMusic = new Visual(image="botonMusic.png", position=game.at(4,2))
+const menuDificulties = new Visual(image="menuDificulties.png", position=game.at(4,3))
 const easy = new Visual(image="easy.png", position=game.at(4,4))
 const medium = new Visual(image="normal.png", position=game.at(4,3))
 const hard = new Visual(image="hard.png", position=game.at(4,2))
+
+object help{method position()= new Position(x=15,y=0) method text() = "(h) ayuda"}
+object help1{method position()= new Position(x=15,y=1) method text() = "(z)modo combate"}
+object help2{method position()= new Position(x=15,y=0) method text() = "(x)disparar"}
+
 object score{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()}
 
 object reinicioMensaje{method position()= new Position(x=5,y=5) method text() = "presione r para reiniciar"}
