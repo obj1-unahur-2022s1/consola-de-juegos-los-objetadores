@@ -40,7 +40,7 @@ object juegoAsteroide {
 	method jugar(unaDificultad) {
 		musica.inicio().stop()
 		game.clear()
-		musica.partida().play()
+		if (!musica.partida().played())musica.partida().play()
 		game.addVisual(fondoEspacio)
 		game.addVisual(score)
 		game.addVisualCharacter(laser)
@@ -63,7 +63,7 @@ object juegoAsteroide {
 				musica.partida().pause()
 			}
 		}
-		keyboard.h().onPressDo{self.ayuda()}
+		keyboard.a().onPressDo{self.ayuda()}
 
 		game.addVisual(help)
 		
@@ -138,7 +138,8 @@ object juegoAsteroide {
 
 	method reiniciar(){
 		nave.configReinicio()
-		self.jugar(0)
+		self.jugar(1)
+		
 	}
 	
 	method irMenu(){

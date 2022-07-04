@@ -71,7 +71,7 @@ const medium = new Visual(image="normal.png", position=game.at(4,3))
 const hard = new Visual(image="hard.png", position=game.at(4,2))
 
 
-object help{method position()= new Position(x=15,y=0) method text() = "(h) ayuda"}
+object help{method position()= new Position(x=15,y=0) method text() = "(a) ayuda"}
 object help1{method position()= new Position(x=15,y=1) method text() = "(z)modo combate"}
 object help2{method position()= new Position(x=15,y=0) method text() = "(x)disparar"}
 
