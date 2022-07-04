@@ -34,7 +34,8 @@ object juegoAsteroide {
 		game.addVisual(fondoMenu)
 		game.addVisual(astronautaMenu)
 		self.iniciarMenu()
-		musica.inicio().play()
+		if(not musica.inicio().played()){musica.inicio().play()}else{musica.inicio().resume()}
+		
 	}
 	
 	method jugar(unaDificultad) {
@@ -101,14 +102,16 @@ object juegoAsteroide {
 	method elementoNoEsMensajesFinal(elemento) = elemento!=reinicioMensaje and elemento!=consolaMensaje and elemento!=menuMensaje
  	
  	method terminar() {
- 		game.removeVisual(laser)
+ 		
+ 		if(game.hasVisual(laser)){game.removeVisual(laser)
  		score.detener()
 		visualesFinalJuego.forEach({ v => game.addVisual(v) })
 		game.schedule(15000, {
 			musica.partida().stop()
 			visualesFinalJuego.forEach({ v => game.removeVisual(v) })
 		})
-		
+		}
+		if (not musica.inicio().paused()){musica.inicio().pause()}
  	}
  	
  	
