@@ -123,10 +123,6 @@ object juegoAsteroide {
 	
 	
 	method menuDificultades(){
-
-		method facil() = 800
-		method medio() = 600
-		method dificil() = 400
 		
 		game.removeVisual(menuMusic)
 		game.removeVisual(menuDificulties)
@@ -161,4 +157,10 @@ object juegoAsteroide {
 		game.addVisual(help1)
 		game.addVisual(help2)
 	}
+}
+
+object dificultad{
+	method facil() = 800
+	method medio() = 600
+	method dificil() = 400
 }

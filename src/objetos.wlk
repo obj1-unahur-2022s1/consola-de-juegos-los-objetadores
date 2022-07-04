@@ -1,10 +1,9 @@
 import wollok.game.*
 import visuales.*
 import lluviaDeAsteroides.*
-<<<<<<< HEAD
 
-=======
->>>>>>> 244714fd79e094891f66aa0f0abf164d9c0ed7f6
+
+
 
 object laser {
 	var property position = nave.position()
