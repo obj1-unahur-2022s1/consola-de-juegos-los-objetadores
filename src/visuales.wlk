@@ -75,7 +75,7 @@ object help{method position()= new Position(x=15,y=0) method text() = "(h) ayuda
 object help1{method position()= new Position(x=15,y=1) method text() = "(z)modo combate"}
 object help2{method position()= new Position(x=15,y=0) method text() = "(x)disparar"}
 
-object score{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()}
+//object score{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()}
 
 const gameOver = new Visual(image="gameOver.png",position=game.at(4,6))
 
