@@ -106,7 +106,7 @@ object nave {
 	
 	method disparar() {
 		if (modoCombate) { 
-			musica.laser().play()
+			//musica.laser().play()
 			laser.disparar()
 		}
 	}
