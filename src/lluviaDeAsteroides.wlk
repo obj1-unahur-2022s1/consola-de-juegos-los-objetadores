@@ -146,11 +146,13 @@ object juegoAsteroide {
 	method irMenu(){
 		self.reiniciar()
 		self.iniciar()
+		musica.partida().stop()
 	}
 	
 	method volverALaConsola() {
 		self.reiniciar()
 		consola.hacerTerminar(self)
+		musica.partida().stop()
 	}
 
 	method ayuda(){
