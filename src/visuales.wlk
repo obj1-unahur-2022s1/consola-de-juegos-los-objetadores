@@ -49,29 +49,41 @@ const mute = new Visual(image="mute.png", position=game.at(1,1))
 const fondoEspacio = new Visual(image="fondoPartida.png", position=game.at(0,0))
 const fondoMenu = new Visual(image="fondoMenu.jpg", position=game.at(0,0))
 const astronautaMenu = new Visual(image="astronautaMenu.png", position=game.at(1,4))
-//const astronautaPuntuacion1 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,4))
-//const astronautaPuntuacion2 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,5))
-//const astronautaPuntuacion3 = new Visual(image="astronautaPuntuacion.png", position=game.at(0,6))
 
 const puntuacionAstronauta = new Visual(image="astronautaPuntuacion.png" ,position=game.at(0, game.height() - 2 ))
 
-// MUSICA
-
-//const musicaInicio = new Sound(file="__-___ ____ _ Super Nintendo  Sega Genesis 80s RetroWave Mix (mp3cut.net).mp3")
-
 // Menu Principal y selleccion de dificultad
 
-const menuMusic = new Visual(image="botonMusic.png", position=game.at(4,2))
-const menuDificulties = new Visual(image="menuDificulties.png", position=game.at(4,3))
-const easy = new Visual(image="easy.png", position=game.at(4,4))
-const medium = new Visual(image="normal.png", position=game.at(4,3))
-const hard = new Visual(image="hard.png", position=game.at(4,2))
+const menuMusic = new Visual(image="botonMusic.png", position=game.at(6,2))
+const menuDificulties = new Visual(image="menuDificulties.png", position=game.at(3,2))
+const dificultadesMenu = new Visual(image="dificultadesMenu.png", position=game.at(6,1))
 
+object help{
+	method position()= new Position(x=15,y=0) 
+	method text() = "(a) AYUDA"
+	method textColor() = "#ffff16" // amarillo
+}
+object help1{
+	method position()= new Position(x=15,y=1) 
+	method text() = "(z) MODO COMBATE"
+	method textColor() = "#ffff16" // amarillo
+}
+object help2{
+	method position()= new Position(x=15,y=0) 
+	method text() = "(x) DISPARAR"
+	method textColor() = "#ffff16" // amarillo
+}
+object help4{
+	method position()= new Position(x=15,y=11) 
+	method text() = "(p) ON/OFF MUSICA"
+	method textColor() = "#ffff16" // amarillo
+}
+object help3{
+	method position()= new Position(x=15,y=2) 
+	method text() = "(c) MODO INVISIBLE"
+	method textColor() = "#ffff16" // amarillo
+}
 
-object help{method position()= new Position(x=15,y=0) method text() = "(a) ayuda"}
-object help1{method position()= new Position(x=15,y=1) method text() = "(z)modo combate"}
-object help2{method position()= new Position(x=15,y=0) method text() = "(x)disparar"}
-object help3{method position()= new Position(x=15,y=2) method text() = "(p) on/off music"}
 
 //object score{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()}
 

@@ -233,7 +233,7 @@ object score {
 object musica {
 	const property inicio = game.sound("musicaInicio.mp3")
 	const property partida = game.sound("musicaPartida.mp3")
-	const property laser = game.sound("laser.mp3")
+	//const property laser = game.sound("laser.mp3")
 }
 	
 	

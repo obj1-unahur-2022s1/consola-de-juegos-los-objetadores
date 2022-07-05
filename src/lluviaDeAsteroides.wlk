@@ -130,10 +130,8 @@ object juegoAsteroide {
 		
 		game.removeVisual(menuDificulties)
 		
-		game.addVisual(easy)
-		game.addVisual(medium)
-		game.addVisual(hard)
-		
+		game.addVisual(dificultadesMenu)
+				
 		keyboard.e().onPressDo {self.jugar(0)}
 		keyboard.n().onPressDo {self.jugar(1)}
 		keyboard.h().onPressDo {self.jugar(2)}
@@ -161,6 +159,7 @@ object juegoAsteroide {
 		game.addVisual(help1)
 		game.addVisual(help2)
 		game.addVisual(help3)
+		game.addVisual(help4)
 		
 	}
 }
