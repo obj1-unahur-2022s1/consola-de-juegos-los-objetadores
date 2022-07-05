@@ -36,11 +36,11 @@ object juegoAsteroide {
 		game.addVisual(astronautaMenu)
 		self.iniciarMenu()
 		if(not musica.inicio().played()){musica.inicio().play()}else{musica.inicio().resume()}
-		
+		keyboard.q().onPressDo{self.volverALaConsola()}
 	}
 	
 	method jugar(unaDificultad) {
-		musica.inicio().stop()
+		if (!musica.inicio().paused())musica.inicio().pause()
 		game.clear()
 		if (!musica.partida().played())musica.partida().play()
 		game.addVisual(fondoEspacio)
