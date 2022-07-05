@@ -77,6 +77,7 @@ object juegoAsteroide {
 			const asteroide = new Asteroide(position=game.at(0.randomUpTo(15),14),image=imagenesAsteroides.anyOne())
 			game.addVisual(asteroide)
 			asteroide.iniciarMovimiento(asteroide.velocidad())
+			
 		})
 		
 		
@@ -168,6 +169,6 @@ object juegoAsteroide {
 
 object dificultad{
 	method facil() = 1000
-	method medio() = 800
-	method dificil() = 600
+	method medio() = 600
+	method dificil() = 200
 }

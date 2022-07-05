@@ -130,7 +130,7 @@ class Astronauta	{
  		
  	method mover() {
  		position = position.down(1)
-	    if (position.y() == -4) { game.removeVisual(self) }
+	    if (position.y() == -4) { if (game.hasVisual(self)) game.removeVisual(self) }
  	}
  		
 	method metodosChoques(){
@@ -180,7 +180,7 @@ class Asteroide {
 	}
 	method mover() {
 		position = position.down(1)
-		if (position.y() == -4) { game.removeVisual(self) }
+		if (position.y() == -4) { game.removeVisual(self) game.removeTickEvent("mover asteroide")}
 	}
 }
 
