@@ -98,7 +98,7 @@ object juegoAsteroide {
 	 }
 	 
 	method elementoNoEsAstronautaVida(elemento) = elemento!= astronautaVida1 and elemento!=astronautaVida0 and elemento!= astronautaVida2
-	method elementoNoEsMensajeAyuda(elemento)= elemento != help1 and elemento != help2 and elemento !=help
+	method elementoNoEsMensajeAyuda(elemento)= elemento != help1 and elemento != help2 and elemento !=help and elemento!=help3
 	method elementoNoEsMensajesFinal(elemento) = elemento!=reinicioMensaje and elemento!=consolaMensaje and elemento!=menuMensaje
  	
  	method terminar() {
@@ -117,7 +117,7 @@ object juegoAsteroide {
  	
  	method iniciarMenu(){
 	
-		game.addVisual(menuMusic)
+		
 		game.addVisual(menuDificulties)
 		
 		keyboard.d().onPressDo {self.menuDificultades()}
@@ -127,7 +127,7 @@ object juegoAsteroide {
 	
 	method menuDificultades(){
 		
-		game.removeVisual(menuMusic)
+		
 		game.removeVisual(menuDificulties)
 		
 		game.addVisual(easy)
@@ -160,6 +160,8 @@ object juegoAsteroide {
 
 		game.addVisual(help1)
 		game.addVisual(help2)
+		game.addVisual(help3)
+		
 	}
 }
 

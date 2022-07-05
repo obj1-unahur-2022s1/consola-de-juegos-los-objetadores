@@ -71,6 +71,7 @@ const hard = new Visual(image="hard.png", position=game.at(4,2))
 object help{method position()= new Position(x=15,y=0) method text() = "(a) ayuda"}
 object help1{method position()= new Position(x=15,y=1) method text() = "(z)modo combate"}
 object help2{method position()= new Position(x=15,y=0) method text() = "(x)disparar"}
+object help3{method position()= new Position(x=15,y=2) method text() = "(p) on/off music"}
 
 //object score{method position()= new Position(x=0,y=11) method text() = "        score:    "+nave.asteroidesRotos()}
 
