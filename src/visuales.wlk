@@ -41,7 +41,7 @@ const imagenesAsteroidesChicos = ["asteroideAmarillo1.png", "asteroideAzul1.png"
 
 // + mas de los astronautas
 
-const mas10 = new Visual(image="mas10.png", position=game.at(7, 5))
+object mas10{method position()= new Position(x=7,y=5) method image() = "mas10.png"}
 
 // Piedras menu
 
