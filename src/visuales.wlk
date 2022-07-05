@@ -29,15 +29,17 @@ const astronautaVida2 = new Visual(image="astronautaPuntuacion.png", position=ga
 
 // Imagenes Asteroides grandes y medianos
 
-const imagenesAsteroidesGrandes = ["asteroideAmarillo.png", "asteroideAzul.png", "asteroideCeleste.png", "asteroideRojo.png", 
+const imagenesAsteroides = ["asteroideAmarillo.png", "asteroideAzul.png", "asteroideCeleste.png", "asteroideRojo.png", 
 		"asteroideRosa.png", "asteroideAmarillo - copia.png", "asteroideAzul - copia.png", "asteroideCeleste - copia.png", "asteroideRojo - copia.png", 
-		"asteroideRosa - copia.png" ]
+		"asteroideRosa - copia.png", "asteroideAmarillo1.png", "asteroideAzul1.png", "asteroideCeleste1.png", "asteroideRojo1.png", 
+		"asteroideRosa1.png", "asteroideAmarillo1 - copia.png", "asteroideAzul1 - copia.png", "asteroideCeleste1 - copia.png", "asteroideRojo1 - copia.png", 
+		"asteroideRosa1 - copia.png" ]
 		
 // Imagenes Asteroides chicos
 		
-const imagenesAsteroidesChicos = ["asteroideAmarillo1.png", "asteroideAzul1.png", "asteroideCeleste1.png", "asteroideRojo1.png", 
+/*const imagenesAsteroidesChicos = ["asteroideAmarillo1.png", "asteroideAzul1.png", "asteroideCeleste1.png", "asteroideRojo1.png", 
 		"asteroideRosa1.png", "asteroideAmarillo1 - copia.png", "asteroideAzul1 - copia.png", "asteroideCeleste1 - copia.png", "asteroideRojo1 - copia.png", 
-		"asteroideRosa1 - copia.png" ]
+		"asteroideRosa1 - copia.png" ]*/
 
 // + mas de los astronautas
 
