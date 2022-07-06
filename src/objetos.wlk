@@ -2,18 +2,11 @@ import wollok.game.*
 import visuales.*
 import lluviaDeAsteroides.*
 
-
-
-
 object laser {
 	var property position = nave.position()
 	const property image = "laserChicoFinal.png"
 	
-	method disparar() {
-		game.onTick(70, "disparar",{ self.mover() })
-		
-	}
-	
+	method disparar() {	game.onTick(70, "disparar",{ self.mover() })}
 	method mover() {
 		position = position.up(1)
 		if (position.y() == 13) { 
@@ -21,6 +14,8 @@ object laser {
 			position = nave.position()
 		}
 	}
+	method metodosChoques(elemento) {}
+	method chocar() {}
 }
 
 object nave {
@@ -33,36 +28,31 @@ object nave {
 	const property vidasCombate = [ naveCombatePoder0, naveCombatePoder1, naveCombatePoder2 ]
 	const property vidasInvisibilidad = [ naveInvPoder0, naveInvPoder1, naveInvPoder2 ]
 	
+	method metodosChoques(elemento) {}
 	method iniciar() {
 		keyboard.x().onPressDo { self.disparar() }
 		keyboard.v().onPressDo { self.decirVidas()}
 		keyboard.c().onPressDo { self.activarModoInvisibilidad()}
 		keyboard.z().onPressDo { self.activarModoCombate() }
 	}
-	
 	method iniciarVidas() {
 		self.vidasCombate().forEach({ v => game.addVisual(v) })
 		self.vidas().forEach({ v => game.addVisual(v) })
 		self.vidasInvisibilidad().forEach({ v => game.addVisual(v) })
 	}
-	
 	//acciones de la nave vida 
-	method chocar(elemento){
-		if (vidas.size() > 0) { self.quitarUnaVida(vidas) } 
-		if  (vidas.size() == 0) { 
-			self.explotar()
+	method chocar(){
+		if (!self.modoInvisible()){
+			if (vidas.size() > 0) { self.quitarUnaVida(vidas) } 
+			if  (vidas.size() == 0) { self.explotar()}
 		}
 	}
-	
 	method explotar(){
 		self.reiniciarVidas()
 		explosion.animacionExplosion()
 		juegoAsteroide.terminar()
 	}
-	
-	method decirVidas(){
-		game.say(self,"tengo "+vidas.size().toString()+" vidas")	
-	}
+	method decirVidas(){ game.say(self,"tengo "+vidas.size().toString()+" vidas")}
 	
 	method activarModoCombate() {
 		if (vidasCombate.size() > 0) {
@@ -76,7 +66,6 @@ object nave {
 		}
 		else { game.say(self, "No tengo mas poderes") }
 	}
-	
 	method activarModoInvisibilidad() {
 		if (vidasInvisibilidad.size() > 0) {
 			modoInvisible = true
@@ -89,12 +78,10 @@ object nave {
 		}
 		else { game.say(self, "No tengo mas poderes") }
 	}
-	
 	method quitarUnaVida(vida) {
 			game.removeVisual(vida.last())
 			vida.remove(vida.last())
 	}
-	
 	method reiniciarVidas() {
 		vidas.clear()
 		vidasCombate.clear()
@@ -103,7 +90,6 @@ object nave {
 		vidasCombate.addAll([ naveCombatePoder0, naveCombatePoder1, naveCombatePoder2 ])
 		vidasInvisibilidad.addAll([ naveInvPoder0, naveInvPoder1, naveInvPoder2 ])
 	}
-	
 	method disparar() {
 		if (modoCombate) { 
 			//musica.laser().play()
@@ -124,23 +110,18 @@ class Astronauta	{
  	var property position 
  	var property image = "vidaAstronauta.png"
  	
- 	method iniciarMovimiento() {
- 		game.onTick(200, "mover astronauta", { self.mover() })
- 	}
- 		
+ 	method iniciarMovimiento() { game.onTick(200, "mover astronauta", { self.mover() }) }
  	method mover() {
  		position = position.down(1)
 	    if (position.y() == -4) { if (game.hasVisual(self)) game.removeVisual(self) }
  	}
- 		
-	method metodosChoques(){
+ 	method metodosChoques(elemento){
 		game.removeVisual(self)
 		game.removeTickEvent("mover astronauta")
 		game.addVisual(mas10)
 		score.segundos(score.segundos() + 10)
 		game.schedule(2000, { game.removeVisual(mas10)	})
-		
-	}
+		}
 }
 	
 class Asteroide {
@@ -149,44 +130,43 @@ class Asteroide {
 	const property imagenAux = image
 	
 	method velocidad() = 
-		if (score.segundos().between(0, 50)) {200}
+		if (score.segundos().between(0, 50)) {160}
 		else if (score.segundos().between(50, 100)) {120}
 		else if (score.segundos().between(100, 150)) {60}
 		else {20}
 	//colision
 	method auxiliarDespuesChoque(){
-		self.volverALaOriginal()
-		self.moverPosicionLuegoDeChoque()
-		nave.asteroidesRotos(nave.asteroidesRotos()+1)
-		game.removeTickEvent("choque asteroide")
+		if (game.hasVisual(self)) {
+			game.removeVisual(self)
+			game.schedule(200 ,{game.removeTickEvent("mover asteroide")})
+		}
+	//	self.volverALaOriginal()
+	//	self.moverPosicionLuegoDeChoque()
+	//	game.removeTickEvent("choque asteroide")
 	}
-	method cambiarLaImagen(){
-		self.image("asteroideRoto.png")
+	method cambiarLaImagen() { self.image("asteroideRoto.png") }
+	method volverALaOriginal(){ self.image(imagenAux) }
+//	method moverPosicionLuegoDeChoque(){
+	//	self.position(new Position(x=0.randomUpTo(game.width()).truncate(0), y =12.randomUpTo(14).truncate(0)))
+//	}
+//	method chocar(){ game.onTick(100,"choque asteroide",{self.auxiliarDespuesChoque()})	}
+	method chocar(){ game.schedule(100 ,{self.auxiliarDespuesChoque()})}
+	method metodosChoques(elemento){
+		elemento.chocar()
+		if (!nave.modoInvisible())self.cambiarLaImagen()
+		if (!nave.modoInvisible())self.chocar()
 	}
-	method volverALaOriginal(){
-		self.image(imagenAux)
-	}
-	method moverPosicionLuegoDeChoque(){
-		self.position(new Position(x=0.randomUpTo(game.width()).truncate(0), y =12.randomUpTo(14).truncate(0)))
-	}
-	method metodosChoques(){
-		self.cambiarLaImagen()
-		self.chocar()
-	}
-	method chocar(){
-		game.onTick(100,"choque asteroide",{self.auxiliarDespuesChoque()})
-	}
+	
 	method iniciarMovimiento(unaVelocidad) {
 		game.onTick(unaVelocidad,"mover asteroide",{ self.mover() })
 	}
 	method mover() {
 		position = position.down(1)
-		if (position.y() == -4) { game.removeVisual(self) game.removeTickEvent("mover asteroide")}
+		if (position.y() == -4) {
+			 	self.auxiliarDespuesChoque()
+		}
 	}
 }
-
-const izquierda = game.at(20,5.randomUpTo(15))
-const derecha = game.at(-15,5.randomUpTo(15))
 
 object explosion{
 	var property image = "explosion1.png"
@@ -212,29 +192,24 @@ object explosion{
 }
 
 object score {
-	
 	var property segundos = 0
 	
 	method text() = segundos.toString()
 	method textColor() = "#d714b2"
 	method position() = game.at(0, 8)
 	
-	method pasarTiempo() {
-		segundos = segundos +1
-	}
+	method pasarTiempo() { segundos = segundos +1 }
 	method iniciar(){
 		segundos = 0
 		game.onTick(1000,"tiempo",{self.pasarTiempo()})
 	}
-	method detener(){
-		game.removeTickEvent("tiempo")
-	}
+	method detener(){ game.removeTickEvent("tiempo") }
+	method metodoDeChoques(elemento) {}
 }
 
 object musica {
 	const property inicio = game.sound("musicaInicio.mp3")
 	const property partida = game.sound("musicaPartida.mp3")
-	//const property laser = game.sound("laser.mp3")
 }
 	
 	

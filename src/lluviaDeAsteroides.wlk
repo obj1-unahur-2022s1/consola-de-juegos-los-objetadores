@@ -97,18 +97,11 @@ object juegoAsteroide {
 				
 		// Las condiciones del if sirve para cuando la nave toca el score o cualquier otro objeto no se quite una vida
 
-		game.onCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and not nave.modoInvisible() and elemento!=score and self.elementoNoEsAstronautaVida(elemento) and elemento!=mas10 and self.elementoNoEsMensajeAyuda(elemento))elemento.metodosChoques()});
-		game.onCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=score and not nave.modoInvisible() and self.elementoNoEsAstronautaVida(elemento) and elemento!=mas10 and self.elementoNoEsMensajeAyuda(elemento)) {elemento.metodosChoques()}});
-		game.onCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and not nave.modoInvisible() and elemento!=score and self.elementoNoEsAstronautaVida(elemento) and self.elementoNoEsMensajesFinal(elemento) and elemento!=mas10 and self.elementoNoEsMensajeAyuda(elemento))nave.chocar(elemento)});
-
- 	
+		game.onCollideDo(nave,{elemento=>elemento.metodosChoques(nave)});
+		game.onCollideDo(laser,{elemento=>elemento.metodosChoques(laser)});
 	 }
 	 
-	method elementoNoEsAstronautaVida(elemento) = elemento!= astronautaVida1 and elemento!=astronautaVida0 and elemento!= astronautaVida2
-	method elementoNoEsMensajeAyuda(elemento)= elemento != help1 and elemento != help2 and elemento !=help and elemento!=help3
-	method elementoNoEsMensajesFinal(elemento) = elemento!=reinicioMensaje and elemento!=consolaMensaje and elemento!=menuMensaje
- 	
- 	method terminar() {
+	method terminar() {
  		
  		if(game.hasVisual(laser)){game.removeVisual(laser)
  		score.detener()
@@ -164,7 +157,7 @@ object juegoAsteroide {
 
 	method ayuda(){
 		game.removeVisual(help)
-
+		
 		game.addVisual(help1)
 		game.addVisual(help2)
 		game.addVisual(help3)
