@@ -138,7 +138,7 @@ class Asteroide {
 	method auxiliarDespuesChoque(){
 		if (game.hasVisual(self)) {
 			game.removeVisual(self)
-			game.schedule(200 ,{game.removeTickEvent("mover asteroide")})
+			game.schedule(300 ,{game.removeTickEvent("mover asteroide")})
 		}
 	//	self.volverALaOriginal()
 	//	self.moverPosicionLuegoDeChoque()
