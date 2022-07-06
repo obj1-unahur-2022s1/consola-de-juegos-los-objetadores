@@ -151,7 +151,8 @@ class Asteroide {
 	method velocidad() = 
 		if (score.segundos().between(0, 50)) {200}
 		else if (score.segundos().between(50, 100)) {120}
-		else {50}
+		else if (score.segundos().between(100, 150)) {60}
+		else {20}
 	//colision
 	method auxiliarDespuesChoque(){
 		self.volverALaOriginal()

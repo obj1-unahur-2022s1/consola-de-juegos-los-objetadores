@@ -74,15 +74,21 @@ object juegoAsteroide {
 		game.addVisual(help)
 		
 		game.onTick(dificultades.get(unaDificultad), "Crear Asteroide", { 
-			const asteroide = new Asteroide(position=game.at(0.randomUpTo(15),14),image=imagenesAsteroides.anyOne())
+			const asteroide = new Asteroide(position=game.at(0.randomUpTo(9),14),image=imagenesAsteroides.anyOne())
 			game.addVisual(asteroide)
 			asteroide.iniciarMovimiento(asteroide.velocidad())
 			
 		})
 		
-		
+		game.onTick(dificultades.get(unaDificultad), "Crear Asteroide", { 
+			const asteroide = new Asteroide(position=game.at(9.randomUpTo(17),14),image=imagenesAsteroides.anyOne())
+			game.addVisual(asteroide)
+			asteroide.iniciarMovimiento(asteroide.velocidad())
+			
+		})
+				
 		game.onTick(10000, "Crear astronauta", { 
-			const astronauta = new Astronauta(position=game.at(0.randomUpTo(16),13))
+			const astronauta = new Astronauta(position=game.at(0.randomUpTo(17),13))
 			game.addVisual(astronauta)
 			astronauta.iniciarMovimiento()
         })
