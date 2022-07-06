@@ -38,7 +38,7 @@ const astronautaVida0 = new Visual(image="astronautaPuntuacion.png", position=ga
 const astronautaVida1 = new Visual(image="astronautaPuntuacion.png", position=game.at(1, 10))
 const astronautaVida2 = new Visual(image="astronautaPuntuacion.png", position=game.at(2, 10))
 
-// Imagenes Asteroides grandes y medianos
+// Imagenes Asteroides
 
 const imagenesAsteroides = ["asteroideAmarillo1.png", "asteroideAmarillo2.png", "asteroideAmarillo3.png", "asteroideAmarillo4.png", 
 	"asteroideAzul1.png", "asteroideAzul2.png", "asteroideAzul3.png", "asteroideAzul4.png", "asteroideRosa1.png", 
@@ -87,16 +87,4 @@ const gameOver = new Visual(image="gameOver.png",position=game.at(4,6))
 const reinicioMensaje = new Visual(position=game.at(5,5), image="reiniciar.png")
 const consolaMensaje = new Visual(position=game.at(5,4), image="irConsola.png")
 const menuMensaje = new Visual(position=game.at(5,3), image="irMenu.png")
-/*
-object consolaMensaje{
-	method position()= new Position(x=5,y=4) 
-	method image() = "irConsola.png"
-	method metodosChoques(elemento) {}
-}
-object menuMensaje{
-	method position()= new Position(x=5,y=3) 
-	method image() = "irMenu.png"
-	method metodosChoques(elemento) {}
-}
-* /
-*/
+

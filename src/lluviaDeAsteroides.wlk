@@ -102,7 +102,6 @@ object juegoAsteroide {
 	 }
 	 
 	method terminar() {
- 		
  		if(game.hasVisual(laser)){game.removeVisual(laser)
  		score.detener()
 		visualesFinalJuego.forEach({ v => game.addVisual(v) })
