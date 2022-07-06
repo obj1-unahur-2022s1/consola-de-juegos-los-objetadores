@@ -44,9 +44,11 @@ object juegoAsteroide {
 	}
 	
 	method jugar(unaDificultad) {
-		if (!musica.inicio().paused())musica.inicio().pause()
 		game.clear()
+		if (!musica.inicio().paused())musica.inicio().pause()
 		if (!musica.partida().played())musica.partida().play()
+		musica.partida().shouldLoop(true)
+	
 		game.addVisual(fondoEspacio)
 		game.addVisual(score)
 		game.addVisualCharacter(laser)
@@ -94,8 +96,6 @@ object juegoAsteroide {
         })
 				
 		// Las condiciones del if sirve para cuando la nave toca el score o cualquier otro objeto no se quite una vida
-
-		
 
 		game.onCollideDo(nave,{elemento=>if(elemento!=laser and elemento!=fondoEspacio and not nave.modoInvisible() and elemento!=score and self.elementoNoEsAstronautaVida(elemento) and elemento!=mas10 and self.elementoNoEsMensajeAyuda(elemento))elemento.metodosChoques()});
 		game.onCollideDo(laser,{elemento=>if(elemento!=nave and elemento!=fondoEspacio and elemento!=score and not nave.modoInvisible() and self.elementoNoEsAstronautaVida(elemento) and elemento!=mas10 and self.elementoNoEsMensajeAyuda(elemento)) {elemento.metodosChoques()}});
