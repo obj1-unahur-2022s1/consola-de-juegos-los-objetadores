@@ -50,6 +50,10 @@ const imagenesAsteroides = ["asteroideAmarillo1.png", "asteroideAmarillo2.png", 
 
 const mas10 = new Visual(position=game.at(7,5), image= "mas10.png")
 
+// Efecto choque rojo
+
+const efectoRojoChoque = new Visual(image="EfectoChoqueRojo.png", position=game.at(0,0))
+ 
 // Mute
 
 const mute = new Visual(image="mute.png", position=game.at(1,1))

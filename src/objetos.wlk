@@ -45,6 +45,10 @@ object nave {
 		if (!self.modoInvisible()){
 			if (vidas.size() > 0) { self.quitarUnaVida(vidas) } 
 			if  (vidas.size() == 0) { self.explotar()}
+			else {
+				game.addVisual(efectoRojoChoque)
+				game.schedule(100 ,{game.removeVisual(efectoRojoChoque)})
+			}	
 		}
 	}
 	method explotar(){
@@ -138,7 +142,7 @@ class Asteroide {
 	method auxiliarDespuesChoque(){
 		if (game.hasVisual(self)) {
 			game.removeVisual(self)
-			game.schedule(300 ,{game.removeTickEvent("mover asteroide")})
+			game.schedule(350 ,{game.removeTickEvent("mover asteroide")})
 		}
 	//	self.volverALaOriginal()
 	//	self.moverPosicionLuegoDeChoque()
@@ -154,6 +158,8 @@ class Asteroide {
 	method metodosChoques(elemento){
 		elemento.chocar()
 		if (!nave.modoInvisible())self.cambiarLaImagen()
+	//	game.addVisual(efectoRojoChoque)
+	//	game.schedule(150 ,{game.removeVisual(efectoRojoChoque)})
 		if (!nave.modoInvisible())self.chocar()
 	}
 	
@@ -212,6 +218,11 @@ object musica {
 	const property partida = game.sound("musicaPartida.mp3")
 }
 	
+object dificultad{
+	method facil() = 800
+	method medio() = 400
+	method dificil() = 100
+}
 	
 	
 	

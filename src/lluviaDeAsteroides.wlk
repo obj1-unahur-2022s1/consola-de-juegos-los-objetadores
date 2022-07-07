@@ -165,8 +165,3 @@ object juegoAsteroide {
 	}
 }
 
-object dificultad{
-	method facil() = 1000
-	method medio() = 600
-	method dificil() = 200
-}
