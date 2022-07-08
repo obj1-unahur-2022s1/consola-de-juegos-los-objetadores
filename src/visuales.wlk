@@ -92,3 +92,4 @@ const reinicioMensaje = new Visual(position=game.at(5,5), image="reiniciar.png")
 const consolaMensaje = new Visual(position=game.at(5,4), image="irConsola.png")
 const menuMensaje = new Visual(position=game.at(5,3), image="irMenu.png")
 
+const imagenBateria = ["bateriaCarga 1.png","bateriaCarga 2.png"]

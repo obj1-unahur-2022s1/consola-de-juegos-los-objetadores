@@ -94,7 +94,11 @@ object juegoAsteroide {
 			game.addVisual(astronauta)
 			astronauta.iniciarMovimiento()
         })
-				
+		game.onTick(10000,"crear bateria",{
+			const bateria = new Bateria(position=game.at(0.randomUpTo(17),13), image = imagenBateria.anyOne())
+			game.addVisual(bateria)
+			bateria.iniciarMovimiento()
+		})
 		// Las condiciones del if sirve para cuando la nave toca el score o cualquier otro objeto no se quite una vida
 
 		game.onCollideDo(nave,{elemento=>elemento.metodosChoques(nave)});

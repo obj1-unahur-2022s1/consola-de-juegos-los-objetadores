@@ -27,6 +27,9 @@ object nave {
 	const property vidas = [astronautaVida0, astronautaVida1, astronautaVida2 ]
 	const property vidasCombate = [ naveCombatePoder0, naveCombatePoder1, naveCombatePoder2 ]
 	const property vidasInvisibilidad = [ naveInvPoder0, naveInvPoder1, naveInvPoder2 ]
+	const property vidasCombateGastadas = []
+	const property vidasGastadas = []
+	const property vidasInvisibleGastadas = []
 	
 	method metodosChoques(elemento) {}
 	method iniciar() {
@@ -62,6 +65,7 @@ object nave {
 		if (vidasCombate.size() > 0) {
 			modoCombate = true
 			image = "naveCombate.png"
+			vidasCombateGastadas.add(vidasCombate.last())
 			self.quitarUnaVida(vidasCombate) 
 			game.schedule(10000, { 
 				modoCombate = false
@@ -74,6 +78,7 @@ object nave {
 		if (vidasInvisibilidad.size() > 0) {
 			modoInvisible = true
 			image = "naveInvisible.png"
+			vidasInvisibleGastadas.add(vidasInvisibilidad.last())
 			self.quitarUnaVida(vidasInvisibilidad) 
 			game.schedule(10000, { 
 				modoInvisible = false
@@ -85,6 +90,16 @@ object nave {
 	method quitarUnaVida(vida) {
 			game.removeVisual(vida.last())
 			vida.remove(vida.last())
+	}
+	method agregarVidaCombate(vida){
+		vidasCombate.add(vidasCombateGastadas.last())
+		game.addVisual(vidasCombateGastadas.last())
+		vidasCombateGastadas.remove(vidasCombateGastadas.last())
+	}
+	method agregarVidaInvisible(vida){
+		vidasInvisibilidad.add(vidasInvisibleGastadas.last())
+		game.addVisual(vidasInvisibleGastadas.last())
+		vidasInvisibleGastadas.remove(vidasInvisibleGastadas.last())
 	}
 	method reiniciarVidas() {
 		vidas.clear()
@@ -114,10 +129,10 @@ class Astronauta	{
  	var property position 
  	var property image = "vidaAstronauta.png"
  	
- 	method iniciarMovimiento() { game.onTick(200, "mover astronauta", { self.mover() }) }
+ 	method iniciarMovimiento() { game.onTick(300, "mover astronauta", { self.mover() }) }
  	method mover() {
  		position = position.down(1)
-	    if (position.y() == -4) { if (game.hasVisual(self)) game.removeVisual(self) }
+	    if (position.y() == -4) { if (game.hasVisual(self)) game.removeVisual(self) game.removeTickEvent("mover astronauta") }
  	}
  	method metodosChoques(elemento){
 		game.removeVisual(self)
@@ -125,6 +140,31 @@ class Astronauta	{
 		game.addVisual(mas10)
 		score.segundos(score.segundos() + 10)
 		game.schedule(2000, { game.removeVisual(mas10)	})
+		}
+}
+
+class Bateria	{
+	var property position 
+ 	var property image = "bateriaCarga 1.png"
+ 	
+ 	
+ 	/*method cambioDeColor(){
+ 		game.schedule(1000,{self.image("bateriaCarga 1.png")})
+ 		game.schedule(2000,{self.image("bateriaCarga 2.png")
+ 			self.cambioDeColor()
+ 		})
+ 		
+ 	}*/
+ 	method iniciarMovimiento() { game.onTick(500, "mover bateria", { self.mover() }) }
+ 	method mover() {
+ 		position = position.down(1)
+	    if (position.y() == -4) { if (game.hasVisual(self)) game.removeVisual(self) game.removeTickEvent("mover bateria")}
+ 	}
+ 	method metodosChoques(elemento){
+		game.removeVisual(self)
+		game.removeTickEvent("mover bateria")
+		if(self.image()=="bateriaCarga 2.png" and nave.vidasCombate().size()!=3)nave.agregarVidaCombate(elemento)
+		if(self.image()=="bateriaCarga 1.png" and nave.vidasInvisibilidad().size()!=3)nave.agregarVidaInvisible(elemento)
 		}
 }
 	
@@ -210,7 +250,7 @@ object score {
 		game.onTick(1000,"tiempo",{self.pasarTiempo()})
 	}
 	method detener(){ game.removeTickEvent("tiempo") }
-	method metodoDeChoques(elemento) {}
+	method metodosChoques(elemento) {}
 }
 
 object musica {
