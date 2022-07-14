@@ -148,13 +148,14 @@ class Bateria	{
  	var property image = "bateriaCarga 1.png"
  	
  	
- 	/*method cambioDeColor(){
- 		game.schedule(1000,{self.image("bateriaCarga 1.png")})
- 		game.schedule(2000,{self.image("bateriaCarga 2.png")
- 			self.cambioDeColor()
- 		})
- 		
- 	}*/
+ 	method cambioDeColor(){
+ 		if(game.hasVisual(self)){	
+ 			game.schedule(1000,{self.image("bateriaCarga 1.png")})
+ 			game.schedule(2000,{self.image("bateriaCarga 2.png")
+ 				self.cambioDeColor()
+ 			})
+ 		}
+ 	}
  	method iniciarMovimiento() { game.onTick(500, "mover bateria", { self.mover() }) }
  	method mover() {
  		position = position.down(1)
