@@ -135,12 +135,19 @@ class Astronauta	{
 	    if (position.y() == -4) { if (game.hasVisual(self)) game.removeVisual(self) game.removeTickEvent("mover astronauta") }
  	}
  	method metodosChoques(elemento){
+ 		
 		game.removeVisual(self)
 		game.removeTickEvent("mover astronauta")
-		game.addVisual(mas10)
-		score.segundos(score.segundos() + 10)
-		game.schedule(2000, { game.removeVisual(mas10)	})
+		if(elemento != laser){
+			game.addVisual(mas10)
+			score.segundos(score.segundos() + 10)
+			game.schedule(2000, { game.removeVisual(mas10)	})}
+		else{
+			game.addVisual(menos10)
+			score.segundos(score.segundos() - 10)
+			game.schedule(2000, { game.removeVisual(menos10)	})}
 		}
+		
 }
 
 class Bateria	{

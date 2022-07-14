@@ -49,6 +49,7 @@ const imagenesAsteroides = ["asteroideAmarillo1.png", "asteroideAmarillo2.png", 
 // + 10 mas de los astronautas flotantes
 
 const mas10 = new Visual(position=game.at(7,5), image= "mas10.png")
+const menos10 = new Visual(position=game.at(7,5), image= "menos10.png")
 
 // Efecto choque rojo
 
